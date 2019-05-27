@@ -35,7 +35,7 @@ object Versions {
     const val RETROFIT_COROUTINES = "0.9.2"
     const val OKHTTP_INTEREPTOR = "3.9.0"
 
-    const val GLIDE = "3.9.0"
+    const val GLIDE = "4.9.0"
     const val CODE_UTILS = "1.19.3"
     const val MATERIAL_DIALOG = "2.8.1"
     const val TIMBER = "4.7.1"

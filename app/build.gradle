@@ -28,10 +28,14 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation Kotlin.STANDARD
+    implementation Koin.ANDROID
     implementation Google.APP_COMPAT
     implementation Google.MULTIDEX
     implementation Google.NAVIGATION_FRAGMENT
     implementation Google.NAVIGATION_UI
+    implementation Google.DESIGN
     implementation Ui.CONSTRAINT_LAYOUT
+    implementation Utils.TIMBER
     implementation project(":feature_post")
+    implementation project(":lib_common")
 }

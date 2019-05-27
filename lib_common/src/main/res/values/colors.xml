@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="theme_color">@color/green_sharp</color>
+    <color name="tab_selected_text">@color/black</color>
+    <color name="tab_unselected_text">@color/grey</color>
+
+    <color name="black">#000000</color>
+    <color name="grey">#C4C4C4</color>
+    <color name="grey_light">#44C4C4C4</color>
+    <color name="green_sharp">#00f481</color>
+
+</resources>

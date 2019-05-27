@@ -1,2 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="hk.olleh.unwire.network"/>
+    package="hk.olleh.unwire.network">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+</manifest>

@@ -7,8 +7,12 @@ class RetrofitRemoteDataSource(
 ) : RemoteDataSource {
 
     override suspend fun getPosts(page: Int): List<PostResponse> =
-        api.getPosts(page)
+        api
+            .getPosts(page)
+            .await()
 
     override suspend fun getPostsByCategory(category: Int, page: Int): List<PostResponse> =
-        api.getPostsByCategory(category, page)
+        api
+            .getPostsByCategory(category, page)
+            .await()
 }

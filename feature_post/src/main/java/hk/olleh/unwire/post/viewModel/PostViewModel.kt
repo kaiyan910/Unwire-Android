@@ -12,9 +12,8 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class PostViewModel(
-    private val getPostUseCase: GetPostUseCase,
-    var category: Int
-) : BaseViewModel() {
+    private val getPostUseCase: GetPostUseCase
+): BaseViewModel() {
 
     private val _posts: MutableLiveData<Resource<List<Post>>> = MutableLiveData()
     val posts: LiveData<Resource<List<Post>>> get() = _posts
@@ -22,16 +21,25 @@ class PostViewModel(
     private val _loading: MutableLiveData<Boolean> = MutableLiveData()
     val loading: LiveData<Boolean> = _loading
 
-    private var page = 0
+    var category = 5
+    private var page = 1
+    private var canLoadMode = true
+
+    init {
+        getPosts(category, page)
+    }
 
     fun loadMore() {
-        page++
-        getPosts(category, page)
+        if (canLoadMode) {
+            page++
+            getPosts(category, page)
+        }
     }
 
     fun changeCategory(newCategory: Int) {
         category = newCategory
-        page = 0
+        page = 1
+        canLoadMode = true
         getPosts(category, page)
     }
 
@@ -43,12 +51,25 @@ class PostViewModel(
                 _loading.postValue(true)
 
                 val posts = getPostUseCase.getPosts(category, page)
-                _posts.postValue(Resource.success(posts))
+
+                if (posts.isEmpty()) {
+                    canLoadMode = false
+                }
+
+                val newList = when(_posts.value) {
+                    is Resource.Success -> (_posts.value as Resource.Success).data.toMutableList()
+                        .apply { addAll(posts) }
+                        .toList()
+
+                    else -> posts
+                }
+
+                _posts.postValue(Resource.Success(newList))
 
             } catch (e: Exception) {
 
                 Timber.e(e)
-                _posts.postValue(Resource.error(ErrorState("")))
+                _posts.postValue(Resource.Error(ErrorState("")))
 
             } finally {
 

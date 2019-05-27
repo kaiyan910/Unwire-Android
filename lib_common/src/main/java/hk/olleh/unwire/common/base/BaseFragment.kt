@@ -10,12 +10,12 @@ import androidx.fragment.app.Fragment
 
 abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
 
-    protected var mBindings: T? = null
-    protected var mViewCreated = false
+    protected var bindings: T? = null
+    protected var viewCreated = false
 
-    open val mIsObserveAfterRequest: Boolean = false
+    open val isObserveAfterRequest: Boolean = false
 
-    private var mRequested = false
+    private var requested = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,17 +23,17 @@ abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        mBindings = DataBindingUtil.inflate(inflater, layout(), container, false)
-        mBindings!!.lifecycleOwner = viewLifecycleOwner
-        mViewCreated = true
-        return mBindings!!.root
+        bindings = DataBindingUtil.inflate(inflater, layout(), container, false)
+        bindings!!.lifecycleOwner = viewLifecycleOwner
+        viewCreated = true
+        return bindings!!.root
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        mBindings = null
-        mViewCreated = false
-        mRequested = false
+        bindings = null
+        viewCreated = false
+        requested = false
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -44,7 +44,7 @@ abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
 
     protected open fun afterViews() {
         // do something after inflate view
-        if (!mIsObserveAfterRequest) observe()
+        if (!isObserveAfterRequest) observe()
         checkIfRequestNeeded()
     }
 
@@ -62,10 +62,10 @@ abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
 
     private fun checkIfRequestNeeded() {
 
-        if (userVisibleHint && !mRequested && mViewCreated) {
-            mRequested = true
+        if (userVisibleHint && !requested && viewCreated) {
+            requested = true
             request()
-            if (mIsObserveAfterRequest) observe()
+            if (isObserveAfterRequest) observe()
         }
     }
 

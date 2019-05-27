@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion Versions.COMPILE_SDK
@@ -31,7 +32,10 @@ dependencies {
 
     implementation Kotlin.STANDARD
     implementation Google.APP_COMPAT
+    implementation Google.DESIGN
+    implementation Ui.RECYCLER_VIEW
     implementation Koin.ANDROID
+    implementation Glide.CORE
     implementation Utils.JODA_TIME
     implementation Utils.TIMBER
     implementation project(":lib_network")
