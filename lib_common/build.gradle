@@ -1,0 +1,39 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+android {
+    compileSdkVersion Versions.COMPILE_SDK
+
+    defaultConfig {
+        minSdkVersion Versions.MIN_SDK
+        targetSdkVersion Versions.TARGET_SDK
+        versionCode Versions.CODE
+        versionName Versions.NAME
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation Kotlin.STANDARD
+    implementation Google.APP_COMPAT
+    implementation Koin.ANDROID
+    implementation Utils.JODA_TIME
+    implementation Utils.TIMBER
+    implementation project(":lib_network")
+
+    testImplementation Testing.MOCKITO
+    testImplementation Testing.JUNIT
+    testImplementation Testing.JUNIT_TIMBER
+}
