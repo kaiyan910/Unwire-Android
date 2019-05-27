@@ -30,5 +30,8 @@ dependencies {
     implementation Kotlin.STANDARD
     implementation Google.APP_COMPAT
     implementation Google.MULTIDEX
+    implementation Google.NAVIGATION_FRAGMENT
+    implementation Google.NAVIGATION_UI
     implementation Ui.CONSTRAINT_LAYOUT
+    implementation project(":feature_post")
 }

@@ -11,6 +11,8 @@ object Versions {
     const val NAME = "1.0"
 
     const val KOTLIN = "1.3.31"
+    const val KOTLIN_ANDROID = "1.2.1"
+    const val KOTLIN_COROUTINES = "1.2.1"
 
     const val ANDROIDX = "1.0.0"
     const val ANDROIDX_UI = "1.0.0"
@@ -18,7 +20,7 @@ object Versions {
     const val ANDROIDX_LIFECYCLE = "2.0.0"
     const val ANDROIDX_MULTIDEX = "2.0.0"
     const val ANDROIDX_KTX = "1.0.0"
-    const val ANDROIDX_KTX_VIEWMODEL = "2.0.0"
+    const val ANDROIDX_KTX_VIEWMODEL = "2.2.0-alpha01"
     const val ANDROIDX_NAVIGATION = "2.0.0"
 
     const val MATERIAL = "1.0.0"
@@ -42,11 +44,12 @@ object Versions {
     const val JUNIT = "4.12"
     const val MOCKIO = "2.1.0"
     const val JUNIT_TIMBER = "1.0.1"
-
 }
 
 object Kotlin {
     const val STANDARD = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.KOTLIN}"
+    const val ANDROID = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.KOTLIN_ANDROID}"
+    const val COROUTINES = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.KOTLIN_COROUTINES}"
 }
 
 // Google

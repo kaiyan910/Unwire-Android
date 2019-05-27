@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="post_mobile">手機</string>
+    <string name="post_tablet">筆電/平板</string>
+    <string name="post_av">影音</string>
+    <string name="post_review">評測</string>
+    <string name="post_apps">APPS</string>
+</resources>

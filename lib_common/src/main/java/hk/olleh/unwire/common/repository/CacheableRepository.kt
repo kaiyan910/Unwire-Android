@@ -12,7 +12,7 @@ class CacheableRepository(
             .getPosts(page)
             .map { Post.fromApi(it) }
 
-    override suspend fun getPostsByCategory(page: Int, category: Int): List<Post> =
+    override suspend fun getPostsByCategory(category: Int, page: Int): List<Post> =
         remoteDataSource
             .getPostsByCategory(category, page)
             .map { Post.fromApi(it) }

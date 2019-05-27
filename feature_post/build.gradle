@@ -1,15 +1,16 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 28
-
+    compileSdkVersion Versions.COMPILE_SDK
 
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion Versions.MIN_SDK
+        targetSdkVersion Versions.TARGET_SDK
+        versionCode Versions.CODE
+        versionName Versions.NAME
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -22,10 +23,34 @@ android {
         }
     }
 
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation Kotlin.STANDARD
+    implementation Kotlin.ANDROID
+    implementation Kotlin.COROUTINES
+
+    implementation Koin.ANDROID
+    implementation Koin.SCOPE
+    implementation Koin.VIEWMODEL
+
+    implementation Google.LIFECYCLE_RUNTIME
+    implementation Google.LIFECYCLE_EXTENSIONS
+    kapt Google.LIFECYCLE_COMPILER
+    implementation Google.KTX_VIEWMODEL
+    implementation Google.DESIGN
+
+    implementation Ui.RECYCLER_VIEW
+    implementation Ui.SWIPE_REFRESH_LAYOUT
+    implementation Ui.CARD_VIEW
+    implementation Ui.CONSTRAINT_LAYOUT
+
+    implementation Utils.TIMBER
 
     implementation project(":lib_common")
 }

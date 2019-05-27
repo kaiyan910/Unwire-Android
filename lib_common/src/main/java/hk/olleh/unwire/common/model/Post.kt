@@ -1,5 +1,6 @@
 package hk.olleh.unwire.common.model
 
+import hk.olleh.unwire.common.Constant
 import hk.olleh.unwire.common.findFirstMatchPattern
 import hk.olleh.unwire.common.toDateTime
 import hk.olleh.unwire.network.model.PostResponse
@@ -26,13 +27,13 @@ data class Post(
             content = res.content.rendered,
             date = res
                 .date
-                .toDateTime("yyyy-MM-ddTHH:mm:ss"),
+                .toDateTime(Constant.API_DATETIME_FORMAT),
             slug = res.slug,
             link = res.link,
             banner = res
                 .content
                 .rendered
-                .findFirstMatchPattern("<a[^>]+href=\"(.*?)\"[^>]*>(.*)?</a>"),
+                .findFirstMatchPattern(Constant.HTML_IMG_REGEX),
             excerpt = res.excerpt.rendered,
             categories = res.categories,
             tags = res.tags
