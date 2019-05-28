@@ -15,6 +15,9 @@ class PostViewModel(
     private val getPostUseCase: GetPostUseCase
 ): BaseViewModel() {
 
+    private val _tabPosition: MutableLiveData<Int> = MutableLiveData()
+    val tabPosition: LiveData<Int> get() = _tabPosition
+
     private val _posts: MutableLiveData<Resource<List<Post>>> = MutableLiveData()
     val posts: LiveData<Resource<List<Post>>> get() = _posts
 
@@ -26,6 +29,9 @@ class PostViewModel(
     private var canLoadMode = true
 
     init {
+
+        _tabPosition.value = 1
+
         getPosts(category, page)
     }
 
