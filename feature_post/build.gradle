@@ -39,9 +39,12 @@ dependencies {
     implementation Koin.SCOPE
     implementation Koin.VIEWMODEL
 
+    implementation Google.NAVIGATION_FRAGMENT
+    implementation Google.NAVIGATION_UI
     implementation Google.LIFECYCLE_RUNTIME
     implementation Google.LIFECYCLE_EXTENSIONS
     kapt Google.LIFECYCLE_COMPILER
+    implementation Google.KTX_CORE
     implementation Google.KTX_VIEWMODEL
     implementation Google.DESIGN
 
@@ -51,6 +54,7 @@ dependencies {
     implementation Ui.CONSTRAINT_LAYOUT
 
     implementation Utils.TIMBER
+    implementation Utils.JODA_TIME
 
     implementation project(":lib_common")
 }

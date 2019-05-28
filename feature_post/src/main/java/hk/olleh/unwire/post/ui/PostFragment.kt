@@ -1,7 +1,11 @@
 package hk.olleh.unwire.post.ui
 
+import android.os.Bundle
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import hk.olleh.unwire.common.argument
 import hk.olleh.unwire.common.base.BaseFragment
 import hk.olleh.unwire.common.miscellaneous.EndlessScrollingListener
 import hk.olleh.unwire.common.miscellaneous.Resource
@@ -10,10 +14,25 @@ import hk.olleh.unwire.post.databinding.FragmentPostBinding
 import hk.olleh.unwire.post.viewModel.PostViewModel
 import org.koin.android.scope.currentScope
 import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class PostFragment : BaseFragment<FragmentPostBinding>() {
 
-    private val viewModel: PostViewModel by viewModel()
+    companion object {
+
+        const val ARGS_CATEGORY = "args_category"
+
+        fun create(category: String) = PostFragment()
+            .apply {
+                arguments = Bundle()
+                    .apply { putString(ARGS_CATEGORY, category) }
+            }
+    }
+
+    private val category by argument(ARGS_CATEGORY, "")
+
+    private val viewModel by viewModel<PostViewModel> { parametersOf(category) }
+
     private val postListAdapter: PostListAdapter by currentScope.inject()
 
     override fun layout(): Int = R.layout.fragment_post
@@ -25,6 +44,16 @@ class PostFragment : BaseFragment<FragmentPostBinding>() {
             ?.apply {
                 // set the view model
                 vm = viewModel
+
+                postListAdapter
+                    .apply {
+                        onItemClickListener = {
+
+                            val bundle = bundleOf("post" to it)
+                            findNavController().navigate(R.id.postDetailsFragment, bundle)
+                        }
+                    }
+
                 // set the recycler view
                 rvPost
                     .apply {

@@ -2,6 +2,7 @@ package hk.olleh.unwire.post.viewModel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.viewModelScope
 import hk.olleh.unwire.common.base.BaseViewModel
 import hk.olleh.unwire.common.miscellaneous.ErrorState
@@ -12,11 +13,9 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class PostViewModel(
-    private val getPostUseCase: GetPostUseCase
+    private val getPostUseCase: GetPostUseCase,
+    private val category: String
 ): BaseViewModel() {
-
-    private val _tabPosition: MutableLiveData<Int> = MutableLiveData()
-    val tabPosition: LiveData<Int> get() = _tabPosition
 
     private val _posts: MutableLiveData<Resource<List<Post>>> = MutableLiveData()
     val posts: LiveData<Resource<List<Post>>> get() = _posts
@@ -24,14 +23,10 @@ class PostViewModel(
     private val _loading: MutableLiveData<Boolean> = MutableLiveData()
     val loading: LiveData<Boolean> = _loading
 
-    var category = 5
     private var page = 1
     private var canLoadMode = true
 
     init {
-
-        _tabPosition.value = 1
-
         getPosts(category, page)
     }
 
@@ -42,19 +37,18 @@ class PostViewModel(
         }
     }
 
-    fun changeCategory(newCategory: Int) {
-        category = newCategory
-        page = 1
-        canLoadMode = true
-        getPosts(category, page)
-    }
-
-    private fun getPosts(category: Int, page: Int) = viewModelScope
+    private fun getPosts(category: String, page: Int) = viewModelScope
         .launch {
 
             try {
+
                 // show loading
                 _loading.postValue(true)
+
+                // when page == 1 means a new category is fetched, so remove the old data first
+                /*if (page == 1) {
+                    _posts.postValue(Resource.Success(listOf()))
+                }*/
 
                 val posts = getPostUseCase.getPosts(category, page)
 

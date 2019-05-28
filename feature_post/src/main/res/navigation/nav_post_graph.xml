@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/postNavigation"
+    app:startDestination="@id/postSelectionFragment">
+
+    <fragment
+        android:id="@+id/postSelectionFragment"
+        android:name="hk.olleh.unwire.post.ui.PostSelectionFragment"
+        android:label="PostSelectionFragment"
+        tools:layout="@layout/fragment_post_selection">
+        <action
+            android:id="@+id/action_postSelectionFragment_to_postDetailsFragment"
+            app:destination="@id/postDetailsFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/postDetailsFragment"
+        android:name="hk.olleh.unwire.post.ui.PostDetailsFragment"
+        android:label="PostDetailsFragment"
+        tools:layout="@layout/fragment_post_details">
+        <argument
+            android:name="post"
+            app:argType="hk.olleh.unwire.common.model.Post" />
+    </fragment>
+
+</navigation>

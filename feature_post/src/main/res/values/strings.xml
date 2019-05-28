@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="post_mobile">手機</string>
-    <string name="post_tablet">筆電/平板</string>
-    <string name="post_av">影音</string>
-    <string name="post_review">評測</string>
-    <string name="post_apps">APPS</string>
+
+    <string-array name="post_tabs">
+        <item>新聞</item>
+        <item>手機</item>
+        <item>筆電/平板</item>
+        <item>影音</item>
+        <item>評測</item>
+        <item>APPS</item>
+    </string-array>
+
 </resources>

@@ -48,6 +48,7 @@ object Versions {
 
 object Kotlin {
     const val STANDARD = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.KOTLIN}"
+    const val ANDROID_EXTENSION_RUNTIME = "org.jetbrains.kotlin:kotlin-android-extensions-runtime:${Versions.KOTLIN}"
     const val ANDROID = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.KOTLIN_ANDROID}"
     const val COROUTINES = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.KOTLIN_COROUTINES}"
 }

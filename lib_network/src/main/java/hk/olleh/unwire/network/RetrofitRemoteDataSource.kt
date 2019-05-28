@@ -11,7 +11,7 @@ class RetrofitRemoteDataSource(
             .getPosts(page)
             .await()
 
-    override suspend fun getPostsByCategory(category: Int, page: Int): List<PostResponse> =
+    override suspend fun getPostsByCategory(category: String, page: Int): List<PostResponse> =
         api
             .getPostsByCategory(category, page)
             .await()

@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
@@ -25,12 +26,18 @@ android {
     dataBinding {
         enabled = true
     }
+
+}
+
+androidExtensions {
+    experimental = true
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation Kotlin.STANDARD
+    implementation Kotlin.ANDROID_EXTENSION_RUNTIME
     implementation Google.APP_COMPAT
     implementation Google.DESIGN
     implementation Ui.RECYCLER_VIEW

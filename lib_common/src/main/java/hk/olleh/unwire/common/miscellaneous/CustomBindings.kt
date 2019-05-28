@@ -1,5 +1,6 @@
 package hk.olleh.unwire.common.miscellaneous
 
+import android.webkit.WebView
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.databinding.InverseBindingAdapter
@@ -9,11 +10,11 @@ import com.google.android.material.tabs.TabLayout
 
 object CustomBindings {
 
-    @JvmStatic
     @BindingAdapter("remote")
+    @JvmStatic
     fun loadRemoteSource(view: ImageView, src: String?) {
 
-        src.let {
+        src?.let {
 
             Glide
                 .with(view.context)
@@ -22,41 +23,23 @@ object CustomBindings {
         }
     }
 
-    @BindingAdapter("selectedTab")
+    @BindingAdapter("html")
     @JvmStatic
-    fun setSelectedTab(view: TabLayout, position: Int?) {
+    fun loadHtml(view: WebView, html: String?) {
 
-        position?.let {
+        html?.let {
 
-            if (view.selectedTabPosition != position) {
-                view
-                    .getTabAt(position)
-                    ?.select()
-            }
+            val data = """
+                <html>
+                    <head>
+                        <meta name="viewport" content="width=device-width, initial-scale=1">
+                        <style>img{max-width: 100%; width:auto; height: auto;}</style>
+                    </head>
+                    <body>$html</body>
+                </html>
+            """.trimIndent()
+
+            view.loadDataWithBaseURL(null, data, "text/html", "UTF-8", null)
         }
-    }
-
-    @InverseBindingAdapter(attribute = "selectedTab")
-    @JvmStatic
-    fun getSelectedTab(view: TabLayout): Int = view.selectedTabPosition
-
-    @BindingAdapter("app:selectedTabAttrChanged")
-    @JvmStatic fun setSelectedTabListeners(
-        view: TabLayout,
-        attrChange: InverseBindingListener
-    ) {
-
-        view.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabReselected(p0: TabLayout.Tab?) {
-            }
-
-            override fun onTabUnselected(p0: TabLayout.Tab?) {
-            }
-
-            override fun onTabSelected(p0: TabLayout.Tab?) {
-
-                attrChange.onChange()
-            }
-        })
     }
 }

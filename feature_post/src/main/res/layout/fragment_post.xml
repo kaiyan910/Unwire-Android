@@ -9,94 +9,20 @@
             type="hk.olleh.unwire.post.viewModel.PostViewModel" />
     </data>
 
-    <LinearLayout
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        app:enabled="@{safeUnbox(vm.loading)}"
+        app:refreshing="@{safeUnbox(vm.loading)}">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/white"
-            android:elevation="@dimen/spacing_small">
-
-            <ImageView
-                android:id="@+id/iv_logo"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:scaleType="centerCrop"
-                android:background="@color/theme_color"
-                android:padding="@dimen/spacing_normal"
-                android:src="@drawable/ic_logo_square_colored"
-                app:layout_constraintBottom_toBottomOf="@id/tab_layout"
-                app:layout_constraintDimensionRatio="1:1"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/tab_layout" />
-
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tab_layout"
-                style="@style/Widget.MaterialComponents.TabLayout"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/iv_logo"
-                app:layout_constraintTop_toTopOf="parent"
-                app:tabBackground="@color/theme_color"
-                app:tabIndicatorColor="@android:color/black"
-                app:tabMode="scrollable"
-                app:tabSelectedTextColor="@android:color/black"
-                app:tabTextColor="@color/tab_unselected_text"
-                app:selectedTab="@={vm.tabPosition}">
-
-                <com.google.android.material.tabs.TabItem
-                    android:id="@+id/tab_item_mobile"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/post_mobile" />
-
-                <com.google.android.material.tabs.TabItem
-                    android:id="@+id/tab_item_tablet"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/post_tablet" />
-
-                <com.google.android.material.tabs.TabItem
-                    android:id="@+id/tab_item_av"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/post_av" />
-
-                <com.google.android.material.tabs.TabItem
-                    android:id="@+id/tab_item_review"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/post_review" />
-
-                <com.google.android.material.tabs.TabItem
-                    android:id="@+id/tab_item_apps"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/post_apps" />
-
-            </com.google.android.material.tabs.TabLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_post"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:enabled="@{safeUnbox(vm.loading)}"
-            app:refreshing="@{safeUnbox(vm.loading)}">
+            android:clipToPadding="false"
+            android:padding="@dimen/spacing_large" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_post"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clipToPadding="false"
-                android:padding="@dimen/spacing_large" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
-    </LinearLayout>
 
 </layout>

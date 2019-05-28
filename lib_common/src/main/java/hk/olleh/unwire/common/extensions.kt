@@ -1,5 +1,6 @@
 package hk.olleh.unwire.common
 
+import androidx.fragment.app.Fragment
 import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
 
@@ -16,3 +17,10 @@ fun String.findFirstMatchPattern(pattern: String): String? =
         .find(this)
         ?.groupValues
         ?.get(1)
+
+fun <T> Fragment.argument(key: String) =
+    lazy { arguments?.get(key) as T ?: throw IllegalArgumentException("$key is required.") }
+
+fun <T> Fragment.argument(key: String, defaultValue: T) = lazy {
+    arguments?.get(key) as? T ?: defaultValue
+}

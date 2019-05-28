@@ -1,23 +1,24 @@
 package hk.olleh.unwire.common.model
 
+import android.os.Parcelable
 import hk.olleh.unwire.common.Constant
 import hk.olleh.unwire.common.findFirstMatchPattern
-import hk.olleh.unwire.common.toDateTime
 import hk.olleh.unwire.network.model.PostResponse
-import org.joda.time.DateTime
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class Post(
     val id: Long,
     val title: String,
     val content: String,
-    val date: DateTime?,
+    val date: String,
     val slug: String,
     val link: String,
     val banner: String?,
     val excerpt: String,
     val categories: List<Long>,
     val tags: List<Long>
-) {
+) : Parcelable {
 
     companion object {
 
@@ -27,7 +28,7 @@ data class Post(
             content = res.content.rendered,
             date = res
                 .date
-                .toDateTime(Constant.API_DATETIME_FORMAT),
+                .replace("T", " "),
             slug = res.slug,
             link = res.link,
             banner = res
