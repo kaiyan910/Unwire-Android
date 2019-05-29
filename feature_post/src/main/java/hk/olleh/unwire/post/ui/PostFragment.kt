@@ -1,7 +1,6 @@
 package hk.olleh.unwire.post.ui
 
 import android.os.Bundle
-import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -49,8 +48,10 @@ class PostFragment : BaseFragment<FragmentPostBinding>() {
                     .apply {
                         onItemClickListener = {
 
-                            val bundle = bundleOf("post" to it)
-                            findNavController().navigate(R.id.postDetailsFragment, bundle)
+                            //val bundle = bundleOf("post" to it)
+
+                            (parentFragment as PostSelectionFragment).details(it)
+                            //indNavController().navigate(R.id.action_postSelectionFragment_to_postDetailsFragment, bundle)
                         }
                     }
 

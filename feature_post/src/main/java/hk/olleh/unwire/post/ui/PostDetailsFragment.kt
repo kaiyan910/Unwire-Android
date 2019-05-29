@@ -20,7 +20,7 @@ class PostDetailsFragment : BaseFragment<FragmentPostDetailsBinding>() {
                 post = details
                 toolbar
                     .apply {
-                        setNavigationIcon(R.drawable.ic_back)
+                        setNavigationIcon(R.drawable.ic_close)
                         setNavigationOnClickListener { findNavController().popBackStack() }
                     }
             }

@@ -5,7 +5,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 
 class PostSelectionPagerAdapter(
-    private val manager: FragmentManager,
+    manager: FragmentManager,
     private val titles: Array<String>
 ) : FragmentPagerAdapter(manager) {
 

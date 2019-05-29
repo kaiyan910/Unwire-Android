@@ -3,6 +3,7 @@ package hk.olleh.unwire
 import android.app.Application
 import hk.olleh.unwire.common.commonModule
 import hk.olleh.unwire.post.postModule
+import net.danlew.android.joda.JodaTimeAndroid
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -24,5 +25,6 @@ class App : Application() {
                     }
             )
         }
+        JodaTimeAndroid.init(this)
     }
 }

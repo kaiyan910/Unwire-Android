@@ -36,6 +36,7 @@ dependencies {
     implementation Google.DESIGN
     implementation Ui.CONSTRAINT_LAYOUT
     implementation Utils.TIMBER
+    implementation Utils.JODA_TIME
     implementation project(":feature_post")
     implementation project(":lib_common")
 }

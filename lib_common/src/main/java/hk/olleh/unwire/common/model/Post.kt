@@ -3,6 +3,8 @@ package hk.olleh.unwire.common.model
 import android.os.Parcelable
 import hk.olleh.unwire.common.Constant
 import hk.olleh.unwire.common.findFirstMatchPattern
+import hk.olleh.unwire.common.timeAgo
+import hk.olleh.unwire.common.toDateTime
 import hk.olleh.unwire.network.model.PostResponse
 import kotlinx.android.parcel.Parcelize
 
@@ -12,6 +14,7 @@ data class Post(
     val title: String,
     val content: String,
     val date: String,
+    val dateAgo: String,
     val slug: String,
     val link: String,
     val banner: String?,
@@ -29,6 +32,12 @@ data class Post(
             date = res
                 .date
                 .replace("T", " "),
+            dateAgo = res
+                .date
+                .replace("T", " ")
+                .toDateTime("yyyy-MM-dd HH:mm:ss")
+                ?.millis
+                .timeAgo(),
             slug = res.slug,
             link = res.link,
             banner = res

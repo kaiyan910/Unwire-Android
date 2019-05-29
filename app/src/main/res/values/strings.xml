@@ -1,3 +1,9 @@
 <resources>
 	<string name="app_name">Unwire.HK</string>
+
+	<string name="menu_news">新聞</string>
+	<string name="menu_search">搜尋</string>
+	<string name="menu_bookmark">書籤</string>
+	<string name="menu_mode">閱讀模式</string>
+
 </resources>

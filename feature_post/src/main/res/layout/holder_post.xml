@@ -4,63 +4,56 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="item"
             type="hk.olleh.unwire.common.model.Post" />
     </data>
 
-    <androidx.cardview.widget.CardView
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="@dimen/spacing_normal"
-        app:cardUseCompatPadding="true">
+        android:orientation="vertical">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <ImageView
+            android:id="@+id/iv_banner"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintDimensionRatio="16:9"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:remote="@{item.banner}" />
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:id="@+id/iv_banner"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:remote="@{item.banner}"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:scaleType="centerCrop"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintDimensionRatio="16:9" />
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_constraintStart_toStartOf="@id/iv_banner"
-                app:layout_constraintEnd_toEndOf="@id/iv_banner"
-                app:layout_constraintTop_toTopOf="@id/iv_banner"
-                app:layout_constraintBottom_toBottomOf="@id/iv_banner"
-                android:background="@drawable/overlay_card_gradient" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/spacing_large"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_banner">
 
             <TextView
-                android:id="@+id/tv_title"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/spacing_large"
-                android:maxLines="2"
-                android:minLines="2"
-                android:ellipsize="end"
-                android:shadowRadius="1"
-                android:shadowDy="1"
-                android:shadowDx="1"
-                android:textSize="18sp"
-                android:shadowColor="@android:color/black"
-                android:textColor="@android:color/white"
-                tools:text="iOS 13 即將面世 Apple WWDC 2019 舉辦時間公佈　新 macOS 及 mac Pro"
-                android:text="@{item.title}" />
+                android:textColor="@android:color/black"
+                android:text="@{item.title}"
+                android:textSize="@dimen/text_title"
+                tools:text="《Marvel Super War》Beta開始　MOBA 5打5 + 大技忠於原著" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{item.dateAgo}"
+                android:textColor="@color/grey"
+                tools:text="剛剛"
+                android:textSize="@dimen/text_caption" />
 
-    </androidx.cardview.widget.CardView>
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

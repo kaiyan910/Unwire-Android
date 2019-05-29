@@ -15,30 +15,30 @@
 
             <ImageView
                 android:id="@+id/iv_logo"
-                app:layout_constraintBottom_toBottomOf="@id/tab_layout"
-                app:layout_constraintDimensionRatio="1:1"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/tab_layout"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:background="@color/theme_color"
                 android:padding="@dimen/spacing_normal"
                 android:scaleType="centerCrop"
-                android:src="@drawable/ic_logo_square_colored" />
+                android:src="@drawable/ic_logo_square_colored"
+                app:layout_constraintBottom_toBottomOf="@id/tab_layout"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tab_layout" />
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tab_layout"
                 style="@style/Widget.MaterialComponents.TabLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/iv_logo"
                 app:layout_constraintTop_toTopOf="parent"
-                app:tabBackground="@color/theme_color"
-                app:tabIndicatorColor="@android:color/black"
+                app:tabBackground="@drawable/bg_tab_layout"
+                app:tabIndicatorColor="@color/theme_color"
                 app:tabMode="scrollable"
-                app:tabSelectedTextColor="@android:color/black"
-                app:tabTextColor="@color/tab_unselected_text"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content" />
+                app:tabSelectedTextColor="@color/theme_color"
+                app:tabTextColor="@color/grey" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
