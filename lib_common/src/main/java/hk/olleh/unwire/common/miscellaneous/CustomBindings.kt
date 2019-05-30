@@ -5,6 +5,7 @@ import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.databinding.InverseBindingAdapter
 import androidx.databinding.InverseBindingListener
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayout
 
@@ -21,6 +22,13 @@ object CustomBindings {
                 .load(it)
                 .into(view)
         }
+    }
+
+    @BindingAdapter("onRefreshListener")
+    @JvmStatic
+    fun onRefreshListener(view: SwipeRefreshLayout, listener: () -> Unit) {
+
+        view.setOnRefreshListener { listener.invoke() }
     }
 
     @BindingAdapter(value = ["html", "dark"], requireAll = true)

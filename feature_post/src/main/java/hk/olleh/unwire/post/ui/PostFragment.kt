@@ -1,6 +1,7 @@
 package hk.olleh.unwire.post.ui
 
 import android.os.Bundle
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,17 +21,21 @@ class PostFragment : BaseFragment<FragmentPostBinding>() {
     companion object {
 
         const val ARGS_CATEGORY = "args_category"
+        const val ARGS_PRO = "args_pro"
 
-        fun create(category: String) = PostFragment()
+        fun create(category: String, isPro: Boolean = false) = PostFragment()
             .apply {
-                arguments = Bundle()
-                    .apply { putString(ARGS_CATEGORY, category) }
+                arguments = bundleOf(
+                    ARGS_CATEGORY to category,
+                    ARGS_PRO to isPro
+                )
             }
     }
 
     private val category by argument(ARGS_CATEGORY, "")
+    private val isPro by argument(ARGS_PRO, false)
 
-    private val viewModel by viewModel<PostViewModel> { parametersOf(category) }
+    private val viewModel by viewModel<PostViewModel> { parametersOf(category, isPro) }
 
     private val postListAdapter: PostListAdapter by currentScope.inject()
 
@@ -48,10 +53,8 @@ class PostFragment : BaseFragment<FragmentPostBinding>() {
                     .apply {
                         onItemClickListener = {
 
-                            //val bundle = bundleOf("post" to it)
-
-                            (parentFragment as PostSelectionFragment).details(it)
-                            //indNavController().navigate(R.id.action_postSelectionFragment_to_postDetailsFragment, bundle)
+                            val bundle = bundleOf("post" to it)
+                            findNavController().navigate(R.id.action_postSelectionFragment_to_postDetailsFragment, bundle)
                         }
                     }
 

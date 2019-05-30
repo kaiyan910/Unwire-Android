@@ -6,7 +6,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 import retrofit2.http.Url
 
-interface UnwireApi {
+interface UnwireProApi {
 
     companion object {
         const val PREFIX = "/wp-json/wp/v2"
@@ -15,7 +15,7 @@ interface UnwireApi {
     @GET("$PREFIX/posts")
     fun getPosts(@Query("page") page: Int): Deferred<List<PostResponse>>
 
-    @GET("$PREFIX/posts")
+    @GET("${UnwireApi.PREFIX}/posts")
     fun getPostsByCategory(
         @Query("categories") category: String,
         @Query("page") page: Int

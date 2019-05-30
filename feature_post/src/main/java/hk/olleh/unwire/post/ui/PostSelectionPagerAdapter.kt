@@ -17,6 +17,9 @@ class PostSelectionPagerAdapter(
         const val TAB_AV = "3481,6394,35"
         const val TAB_REVIEW = "7311"
         const val TAB_APPS = "4909,1959,1961,1962"
+        const val TAB_PRO = ""
+        const val TAB_PRO_SECURITY = "8"
+        const val TAB_PRO_INTERVIEW = "2,9"
     }
 
     override fun getItem(position: Int): Fragment {
@@ -27,10 +30,13 @@ class PostSelectionPagerAdapter(
             3 -> TAB_AV
             4 -> TAB_REVIEW
             5 -> TAB_APPS
+            6 -> TAB_PRO
+            7 -> TAB_PRO_SECURITY
+            8 -> TAB_PRO_INTERVIEW
             else -> TAB_NEWS
         }
 
-        return PostFragment.create(category)
+        return PostFragment.create(category, position >= 6)
     }
 
     override fun getCount(): Int = titles.size

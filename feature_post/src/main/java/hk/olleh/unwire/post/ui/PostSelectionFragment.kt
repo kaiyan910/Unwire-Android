@@ -22,11 +22,4 @@ class PostSelectionFragment : BaseFragment<FragmentPostSelectionBinding>() {
                 tabLayout.setupWithViewPager(viewPager)
             }
     }
-
-    fun details(post: Post) {
-
-        val direction =
-            PostSelectionFragmentDirections.actionPostSelectionFragmentToPostDetailsFragment(post)
-        findNavController().navigate(direction)
-    }
 }

@@ -15,7 +15,8 @@ import timber.log.Timber
 
 class PostViewModel(
     private val getPostUseCase: GetPostUseCase,
-    private val category: String
+    private val category: String,
+    private val isPro: Boolean
 ): BaseViewModel() {
 
     private val _posts: MutableLiveData<Resource<List<Post>>> = MutableLiveData()
@@ -28,17 +29,24 @@ class PostViewModel(
     private var canLoadMode = true
 
     init {
-        getPosts(category, page)
+        getPosts(category, page, isPro)
     }
 
     fun loadMore() {
         if (canLoadMode) {
             page++
-            getPosts(category, page)
+            getPosts(category, page, isPro)
         }
     }
 
-    private fun getPosts(category: String, page: Int) = viewModelScope
+    fun refresh() {
+
+        page = 1
+        _posts.value = Resource.Success(listOf())
+        getPosts(category, page, isPro)
+    }
+
+    private fun getPosts(category: String, page: Int, isPro: Boolean) = viewModelScope
         .launch {
 
             try {
@@ -46,7 +54,7 @@ class PostViewModel(
                 // show loading
                 _loading.postValue(true)
 
-                val posts = getPostUseCase.getPosts(category, page)
+                val posts = getPostUseCase.getPosts(category, page, isPro)
 
                 if (posts.isEmpty()) {
                     canLoadMode = false

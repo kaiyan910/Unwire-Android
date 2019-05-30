@@ -34,7 +34,7 @@ val networkModule = module {
 
     single<Converter.Factory> { MoshiConverterFactory.create() }
 
-    single {
+    single(named("RETROFIT")) {
 
         Retrofit
             .Builder()
@@ -45,7 +45,20 @@ val networkModule = module {
             .build()
     }
 
-    single { get<Retrofit>().create(UnwireApi::class.java) }
+    single(named("RETROFIT_PRO")) {
 
-    single<RemoteDataSource> { RetrofitRemoteDataSource(get()) }
+        Retrofit
+            .Builder()
+            .baseUrl("https://unwire.pro")
+            .addConverterFactory(get())
+            .addCallAdapterFactory(CoroutineCallAdapterFactory.invoke())
+            .client(get())
+            .build()
+    }
+
+    single { get<Retrofit>(named("RETROFIT")).create(UnwireApi::class.java) }
+
+    single { get<Retrofit>(named("RETROFIT_PRO")).create(UnwireProApi::class.java) }
+
+    single<RemoteDataSource> { RetrofitRemoteDataSource(get(), get()) }
 }

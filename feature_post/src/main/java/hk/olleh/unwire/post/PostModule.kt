@@ -17,7 +17,7 @@ val postModule = module {
 
     factory<GetPostUseCase> { GetPostUseCaseImpl(get()) }
 
-    viewModel { (category: String) -> PostViewModel(get(), category) }
+    viewModel { (category: String, isPro: Boolean) -> PostViewModel(get(), category, isPro) }
 
     scope(named<PostSelectionFragment>()) {
 

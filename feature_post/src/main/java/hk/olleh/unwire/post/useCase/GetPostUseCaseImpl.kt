@@ -9,8 +9,8 @@ class GetPostUseCaseImpl(
     private val repository: Repository
 ) : GetPostUseCase {
 
-    override suspend fun getPosts(category: String, page: Int): List<Post> =
+    override suspend fun getPosts(category: String, page: Int, isPro: Boolean): List<Post> =
         withContext(Dispatchers.IO) {
-            repository.getPostsByCategory(category, page)
+            repository.getPostsByCategory(category, page, isPro)
         }
 }

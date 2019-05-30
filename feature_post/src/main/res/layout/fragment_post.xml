@@ -13,7 +13,7 @@
         android:id="@+id/swipe_refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:enabled="@{safeUnbox(vm.loading)}"
+        app:onRefreshListener="@{() -> vm.refresh()}"
         app:refreshing="@{safeUnbox(vm.loading)}">
 
         <androidx.recyclerview.widget.RecyclerView
