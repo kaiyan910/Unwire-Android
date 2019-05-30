@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="dark"
+            type="Boolean" />
         <variable
             name="post"
             type="hk.olleh.unwire.common.model.Post" />
@@ -18,18 +21,22 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/white"
+            android:background="?attr/appBackground"
             android:elevation="@dimen/spacing_normal"
+            android:theme="@style/ThemeOverlay.MaterialComponents.Dark"
             app:contentInsetStartWithNavigation="0dp"
+            app:navigationIcon="?attr/appToolbarClose"
             app:subtitle="@{post.dateAgo}"
             app:subtitleTextColor="@color/grey"
             app:title="@{post.title}"
-            app:titleTextColor="@color/theme_color" />
+            app:titleTextColor="@color/theme_color"
+            tools:navigationIcon="@drawable/ic_close" />
 
         <WebView
             android:id="@+id/web_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:dark="@{safeUnbox(dark)}"
             app:html="@{post.content}" />
 
     </LinearLayout>

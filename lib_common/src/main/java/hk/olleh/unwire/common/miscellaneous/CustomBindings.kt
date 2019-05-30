@@ -23,9 +23,21 @@ object CustomBindings {
         }
     }
 
-    @BindingAdapter("html")
+    @BindingAdapter(value = ["html", "dark"], requireAll = true)
     @JvmStatic
-    fun loadHtml(view: WebView, html: String?) {
+    fun loadHtml(view: WebView, html: String?, dark: Boolean) {
+
+        val background = if (dark) {
+            "#000000"
+        } else {
+            "#FFFFFF"
+        }
+
+        val color = if (dark) {
+            "#C4C4C4"
+        } else {
+            "#000000"
+        }
 
         html?.let {
 
@@ -33,7 +45,17 @@ object CustomBindings {
                 <html>
                     <head>
                         <meta name="viewport" content="width=device-width, initial-scale=1">
-                        <style>img{max-width: 100%; width:auto; height: auto;}</style>
+                        <style>
+                            img{max-width: 100%; width:auto; height: auto;}
+                            body {
+                                background-color: $background;
+                                color: $color;
+                                padding: 16px;
+                            }
+                            a {
+                                color: #00f481;
+                            }
+                        </style>
                     </head>
                     <body>$html</body>
                 </html>

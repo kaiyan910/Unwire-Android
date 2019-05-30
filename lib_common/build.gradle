@@ -46,6 +46,7 @@ dependencies {
     implementation Utils.JODA_TIME
     implementation Utils.TIMBER
     implementation project(":lib_network")
+    api project(":lib_preferences")
 
     testImplementation Testing.MOCKITO
     testImplementation Testing.JUNIT

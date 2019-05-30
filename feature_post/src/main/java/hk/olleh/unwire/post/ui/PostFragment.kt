@@ -55,6 +55,8 @@ class PostFragment : BaseFragment<FragmentPostBinding>() {
                         }
                     }
 
+                swipeRefreshLayout.setColorSchemeResources(R.color.theme_color)
+
                 // set the recycler view
                 rvPost
                     .apply {
@@ -68,6 +70,8 @@ class PostFragment : BaseFragment<FragmentPostBinding>() {
                             }
                         })
                     }
+
+
             }
     }
 

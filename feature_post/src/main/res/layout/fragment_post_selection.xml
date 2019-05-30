@@ -34,11 +34,11 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/iv_logo"
                 app:layout_constraintTop_toTopOf="parent"
-                app:tabBackground="@drawable/bg_tab_layout"
+                app:tabBackground="?attr/appComponentBackground"
                 app:tabIndicatorColor="@color/theme_color"
                 app:tabMode="scrollable"
                 app:tabSelectedTextColor="@color/theme_color"
-                app:tabTextColor="@color/grey" />
+                app:tabTextColor="?attr/appInactive" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -26,7 +26,7 @@
 
         <activity
             android:name=".MainActivity"
-            android:theme="@style/AppTheme.LightStatus" />
+            android:theme="@style/AppTheme.LightStatus.Dark" />
 
     </application>
 

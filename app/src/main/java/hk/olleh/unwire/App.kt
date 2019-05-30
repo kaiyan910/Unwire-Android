@@ -22,6 +22,7 @@ class App : Application() {
                     .toMutableList()
                     .apply {
                         add(postModule)
+                        add(mainModule)
                     }
             )
         }

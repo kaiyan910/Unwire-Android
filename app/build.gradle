@@ -29,6 +29,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation Kotlin.STANDARD
     implementation Koin.ANDROID
+    implementation Koin.VIEWMODEL
     implementation Google.APP_COMPAT
     implementation Google.MULTIDEX
     implementation Google.NAVIGATION_FRAGMENT

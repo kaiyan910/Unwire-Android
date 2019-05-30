@@ -9,6 +9,7 @@ import hk.olleh.unwire.common.miscellaneous.ErrorState
 import hk.olleh.unwire.common.miscellaneous.Resource
 import hk.olleh.unwire.common.model.Post
 import hk.olleh.unwire.post.useCase.GetPostUseCase
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
@@ -44,11 +45,6 @@ class PostViewModel(
 
                 // show loading
                 _loading.postValue(true)
-
-                // when page == 1 means a new category is fetched, so remove the old data first
-                /*if (page == 1) {
-                    _posts.postValue(Resource.Success(listOf()))
-                }*/
 
                 val posts = getPostUseCase.getPosts(category, page)
 

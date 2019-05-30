@@ -27,5 +27,6 @@ dependencies {
 
     implementation Kotlin.STANDARD
     implementation Google.APP_COMPAT
+    implementation Google.KTX_CORE
     implementation Koin.ANDROID
 }

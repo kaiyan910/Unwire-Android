@@ -7,4 +7,11 @@
         <attr name="enabled" format="boolean" />
     </declare-styleable>
 
+    <attr name="appBackground" format="color|reference" />
+    <attr name="appToolbarClose" format="reference" />
+    <attr name="appTitle" format="color|reference" />
+    <attr name="appText" format="color|reference" />
+    <attr name="appComponentBackground" format="color|reference" />
+    <attr name="appInactive" format="color|reference" />
+
 </resources>
