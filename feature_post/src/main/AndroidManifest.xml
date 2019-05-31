@@ -1,2 +1,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="hk.olleh.unwire.post"/>
+    package="hk.olleh.unwire.post">
+
+    <application>
+
+        <activity
+            android:name=".ui.PostVideoActivity"
+            android:theme="@style/AppTheme.Video" />
+
+    </application>
+
+</manifest>

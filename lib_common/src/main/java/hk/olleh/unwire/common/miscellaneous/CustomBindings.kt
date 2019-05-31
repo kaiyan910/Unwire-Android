@@ -1,13 +1,17 @@
 package hk.olleh.unwire.common.miscellaneous
 
+import android.graphics.Color
+import android.os.Build
+import android.text.Html
 import android.webkit.WebView
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
-import androidx.databinding.InverseBindingAdapter
-import androidx.databinding.InverseBindingListener
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bumptech.glide.Glide
-import com.google.android.material.tabs.TabLayout
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import hk.olleh.unwire.common.R
+import timber.log.Timber
 
 object CustomBindings {
 
@@ -15,11 +19,15 @@ object CustomBindings {
     @JvmStatic
     fun loadRemoteSource(view: ImageView, src: String?) {
 
+        Timber.d("[DEBUG] load image $src")
+
         src?.let {
 
             Glide
                 .with(view.context)
                 .load(it)
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .error(R.drawable.img_splashing_logo)
                 .into(view)
         }
     }
@@ -29,6 +37,22 @@ object CustomBindings {
     fun onRefreshListener(view: SwipeRefreshLayout, listener: () -> Unit) {
 
         view.setOnRefreshListener { listener.invoke() }
+    }
+
+    @BindingAdapter("html")
+    @JvmStatic
+    fun loadHTML(view: TextView, html: String?) {
+
+        html?.let {
+
+            view.setLinkTextColor(Color.BLACK)
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                view.text = Html.fromHtml(it, Html.FROM_HTML_MODE_COMPACT)
+            } else {
+                view.text = Html.fromHtml(it)
+            }
+        }
     }
 
     @BindingAdapter(value = ["html", "dark"], requireAll = true)
@@ -47,29 +71,34 @@ object CustomBindings {
             "#000000"
         }
 
-        html?.let {
+        html
+            ?.let {
 
-            val data = """
-                <html>
-                    <head>
-                        <meta name="viewport" content="width=device-width, initial-scale=1">
-                        <style>
-                            img{max-width: 100%; width:auto; height: auto;}
-                            body {
-                                background-color: $background;
-                                color: $color;
-                                padding: 16px;
-                            }
-                            a {
-                                color: #00f481;
-                            }
-                        </style>
-                    </head>
-                    <body>$html</body>
-                </html>
-            """.trimIndent()
+                val data = """
+                    <html>
+                        <head>
+                            <meta name="viewport" content="width=device-width, initial-scale=1">
+                            <style>
+                                img{max-width: 100%; width:auto; height: auto;}
+                                body {
+                                    background-color: $background;
+                                    color: $color;
+                                    padding: 16px;
+                                }
+                                a {
+                                    color: #00f481;
+                                }
+                            </style>
+                        </head>
+                        <body>$html</body>
+                    </html>
+                """.trimIndent()
 
-            view.loadDataWithBaseURL(null, data, "text/html", "UTF-8", null)
-        }
+                view
+                    .apply {
+                        settings.javaScriptEnabled = true
+                        loadDataWithBaseURL(null, data, "text/html", "UTF-8", null)
+                    }
+            }
     }
 }

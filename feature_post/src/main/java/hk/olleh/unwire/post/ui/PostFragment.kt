@@ -1,10 +1,14 @@
 package hk.olleh.unwire.post.ui
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.LinearLayout.VERTICAL
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import hk.olleh.unwire.common.Constant
 import hk.olleh.unwire.common.argument
 import hk.olleh.unwire.common.base.BaseFragment
 import hk.olleh.unwire.common.miscellaneous.EndlessScrollingListener
@@ -54,7 +58,21 @@ class PostFragment : BaseFragment<FragmentPostBinding>() {
                         onItemClickListener = {
 
                             val bundle = bundleOf("post" to it)
-                            findNavController().navigate(R.id.action_postSelectionFragment_to_postDetailsFragment, bundle)
+
+                            if (category == Constant.CATEGORY_TV) {
+
+                                activity?.apply {
+
+                                    val intent = Intent(this, PostVideoActivity::class.java)
+                                    intent.putExtras(bundle)
+                                    startActivity(intent)
+                                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+                                }
+
+                            } else {
+                                findNavController()
+                                    .navigate(R.id.action_postSelectionFragment_to_postDetailsFragment, bundle)
+                            }
                         }
                     }
 
@@ -66,6 +84,8 @@ class PostFragment : BaseFragment<FragmentPostBinding>() {
                         layoutManager = LinearLayoutManager(context)
                         adapter = postListAdapter
 
+                        addItemDecoration(DividerItemDecoration(context, VERTICAL))
+
                         // set on scroll listener
                         addOnScrollListener(object : EndlessScrollingListener() {
                             override fun onLoadMore() {
@@ -73,8 +93,6 @@ class PostFragment : BaseFragment<FragmentPostBinding>() {
                             }
                         })
                     }
-
-
             }
     }
 

@@ -3,40 +3,29 @@ package hk.olleh.unwire.post.ui
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import hk.olleh.unwire.common.Constant
 
 class PostSelectionPagerAdapter(
     manager: FragmentManager,
     private val titles: Array<String>
 ) : FragmentPagerAdapter(manager) {
 
-    companion object {
-
-        const val TAB_NEWS = ""
-        const val TAB_MOBILE = "5"
-        const val TAB_NOTEBOOK = "7"
-        const val TAB_AV = "3481,6394,35"
-        const val TAB_REVIEW = "7311"
-        const val TAB_APPS = "4909,1959,1961,1962"
-        const val TAB_PRO = ""
-        const val TAB_PRO_SECURITY = "8"
-        const val TAB_PRO_INTERVIEW = "2,9"
-    }
-
     override fun getItem(position: Int): Fragment {
 
         val category = when(position) {
-            1 -> TAB_MOBILE
-            2 -> TAB_NOTEBOOK
-            3 -> TAB_AV
-            4 -> TAB_REVIEW
-            5 -> TAB_APPS
-            6 -> TAB_PRO
-            7 -> TAB_PRO_SECURITY
-            8 -> TAB_PRO_INTERVIEW
-            else -> TAB_NEWS
+            1 -> Constant.CATEGORY_TV
+            2 -> Constant.CATEGORY_MOBILE
+            3 -> Constant.CATEGORY_NOTEBOOK
+            4 -> Constant.CATEGORY_AV
+            5 -> Constant.CATEGORY_REVIEW
+            6 -> Constant.CATEGORY_APPS
+            7 -> Constant.CATEGORY_PRO
+            8 -> Constant.CATEGORY_PRO_SECURITY
+            9 -> Constant.CATEGORY_PRO_INTERVIEW
+            else -> Constant.CATEGORY_NEWS
         }
 
-        return PostFragment.create(category, position >= 6)
+        return PostFragment.create(category, position >= 7)
     }
 
     override fun getCount(): Int = titles.size

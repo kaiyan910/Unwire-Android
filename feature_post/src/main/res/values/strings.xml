@@ -3,6 +3,7 @@
 
     <string-array name="post_tabs">
         <item>新聞</item>
+        <item>TV</item>
         <item>手機</item>
         <item>筆電/平板</item>
         <item>影音</item>

@@ -20,33 +20,61 @@ data class Post(
     val banner: String?,
     val excerpt: String,
     val categories: List<Long>,
-    val tags: List<Long>
+    val tags: List<Long>,
+    val isVideo: Boolean,
+    val video: String?
 ) : Parcelable {
 
     companion object {
 
-        fun fromApi(res: PostResponse) = Post(
-            id = res.id,
-            title = res.title.rendered,
-            content = res.content.rendered,
-            date = res
-                .date
-                .replace("T", " "),
-            dateAgo = res
-                .date
-                .replace("T", " ")
-                .toDateTime("yyyy-MM-dd HH:mm:ss")
-                ?.millis
-                .timeAgo(),
-            slug = res.slug,
-            link = res.link,
-            banner = res
-                .content
-                .rendered
-                .findFirstMatchPattern(Constant.HTML_IMG_REGEX),
-            excerpt = res.excerpt.rendered,
-            categories = res.categories,
-            tags = res.tags
-        )
+        fun fromApi(res: PostResponse): Post {
+
+            val isVideoPost = res
+                .categories
+                .contains(Constant.CATEGORY_TV.toLong())
+
+            val image = if (isVideoPost) {
+
+                res
+                    .content
+                    .rendered
+                    .findFirstMatchPattern(Constant.HTML_IFRAME_REGEX)
+                    ?.findFirstMatchPattern(Constant.VIDEO_REGEX)
+                    ?.let { "https://graph.facebook.com/$it/picture" }
+
+            } else {
+
+                res
+                    .content
+                    .rendered
+                    .findFirstMatchPattern(Constant.HTML_IMG_REGEX)
+            }
+
+            return Post(
+                id = res.id,
+                title = res.title.rendered,
+                content = res.content.rendered,
+                date = res
+                    .date
+                    .replace("T", " "),
+                dateAgo = res
+                    .date
+                    .replace("T", " ")
+                    .toDateTime("yyyy-MM-dd HH:mm:ss")
+                    ?.millis
+                    .timeAgo(),
+                slug = res.slug,
+                link = res.link,
+                banner = image,
+                excerpt = res.excerpt.rendered,
+                categories = res.categories,
+                tags = res.tags,
+                isVideo = isVideoPost,
+                video = res
+                    .content
+                    .rendered
+                    .findFirstMatchPattern(Constant.HTML_IFRAME_REGEX)
+            )
+        }
     }
 }
