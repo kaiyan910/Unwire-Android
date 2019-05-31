@@ -1,5 +1,6 @@
 package hk.olleh.unwire.post.ui
 
+import android.content.Intent
 import androidx.navigation.fragment.findNavController
 import hk.olleh.unwire.common.argument
 import hk.olleh.unwire.common.base.BaseFragment
@@ -26,6 +27,19 @@ class PostDetailsFragment : BaseFragment<FragmentPostDetailsBinding>() {
                 toolbar
                     .apply {
                         setNavigationOnClickListener { findNavController().popBackStack() }
+                        inflateMenu(R.menu.menu_post_details)
+                        setOnMenuItemClickListener {
+
+                            Intent(Intent.ACTION_SEND)
+                                .apply {
+                                    putExtra(Intent.EXTRA_TEXT, "${details.link}\n${details.title}")
+                                    type = "text/plain"
+                                    startActivity(this)
+                                }
+
+
+                            true
+                        }
                     }
             }
     }

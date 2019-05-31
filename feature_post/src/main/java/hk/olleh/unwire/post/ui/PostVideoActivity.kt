@@ -1,5 +1,6 @@
 package hk.olleh.unwire.post.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.webkit.WebChromeClient
 import androidx.appcompat.app.AppCompatActivity
@@ -29,6 +30,18 @@ class PostVideoActivity : AppCompatActivity() {
                 toolbar
                     .apply {
                         setNavigationOnClickListener { onBackPressed() }
+                        inflateMenu(R.menu.menu_post_details)
+                        setOnMenuItemClickListener {
+
+                            Intent(Intent.ACTION_SEND)
+                                .apply {
+                                    putExtra(Intent.EXTRA_TEXT, "${item.link}\n${item.title}")
+                                    type = "text/plain"
+                                    startActivity(this)
+                                }
+
+                            true
+                        }
                     }
                 // setup web view
                 webView

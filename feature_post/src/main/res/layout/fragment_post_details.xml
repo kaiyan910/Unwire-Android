@@ -23,6 +23,7 @@
             android:layout_height="wrap_content"
             android:background="?attr/appBackground"
             android:elevation="@dimen/spacing_normal"
+            app:popupTheme="@style/ThemeOverlay.MaterialComponents.Dark"
             android:theme="@style/ThemeOverlay.MaterialComponents.Dark"
             app:contentInsetStartWithNavigation="0dp"
             app:navigationIcon="?attr/appToolbarClose"
