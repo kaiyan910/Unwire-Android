@@ -37,7 +37,6 @@ class PostDetailsFragment : BaseFragment<FragmentPostDetailsBinding>() {
                                     startActivity(this)
                                 }
 
-
                             true
                         }
                     }

@@ -11,23 +11,28 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import hk.olleh.unwire.common.R
-import timber.log.Timber
 
 object CustomBindings {
 
     @BindingAdapter("remote")
     @JvmStatic
-    fun loadRemoteSource(view: ImageView, src: String?) {
+    fun loadRemoteSource(view: ImageView, url: String?) {
 
-        Timber.d("[DEBUG] load image $src")
-
-        src?.let {
+        if (url != null) {
 
             Glide
                 .with(view.context)
-                .load(it)
+                .load(url)
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .error(R.drawable.img_splashing_logo)
+                .into(view)
+
+        } else {
+
+            Glide
+                .with(view.context)
+                .load(R.drawable.img_splashing_logo)
+                .transition(DrawableTransitionOptions.withCrossFade())
                 .into(view)
         }
     }

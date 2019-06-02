@@ -53,7 +53,10 @@ data class Post(
             return Post(
                 id = res.id,
                 title = res.title.rendered,
-                content = res.content.rendered,
+                content = res
+                    .content
+                    .rendered
+                    .replace("width=\"[0-9]+\"".toRegex(), "width=\"100%\""),
                 date = res
                     .date
                     .replace("T", " "),

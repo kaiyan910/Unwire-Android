@@ -23,12 +23,15 @@ class VideoFullscreenWebChromeClient(
     private val activityReference = WeakReference<Activity>(activity)
     private val container = WeakReference<ViewGroup>(containerViewGroup)
     private var customView: View? = null
+    private var customViewCallback: CustomViewCallback? = null
 
     private var savedSystemUiVisibility: Int = 0
 
     override fun onHideCustomView() {
 
         Timber.d("[DEBUG] onHideCustomView")
+
+        customViewCallback?.onCustomViewHidden()
 
         restoreUi()
 
@@ -62,10 +65,12 @@ class VideoFullscreenWebChromeClient(
     override fun onShowCustomView(view: View?, callback: CustomViewCallback?) {
 
         Timber.d("[DEBUG] onShowCustomView")
+        customViewCallback = callback
 
         view
             ?.apply {
 
+                Timber.d("[DEBUG] onShowCustomView view != null")
                 customView = view
                 layoutParams = fullscreenLayoutParams
 
@@ -81,8 +86,10 @@ class VideoFullscreenWebChromeClient(
                         window
                             .decorView
                             .systemUiVisibility = SYSTEM_UI_FLAG_FULLSCREEN
+
+                        Timber.d("[DEBUG] onShowCustomView change orientation to SCREEN_ORIENTATION_LANDSCAPE")
                         // change to landscape mode
-                        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+                        // requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
                     }
 
                 container
@@ -94,6 +101,8 @@ class VideoFullscreenWebChromeClient(
                     }
             }
     }
+
+    fun underCustomViewMode() = customView != null
 
     private fun restoreUi() {
 
@@ -107,7 +116,7 @@ class VideoFullscreenWebChromeClient(
             .get()
             ?.apply {
 
-                requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+                // requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
                 // restore status bar
                 window
                     .decorView
