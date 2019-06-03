@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="app_name">Unwire.HK</string>
+
     <string-array name="post_tabs">
         <item>新聞</item>
         <item>TV</item>
@@ -14,6 +16,7 @@
         <item>企業專訪</item>
     </string-array>
 
+    <string name="post_menu_search">搜尋</string>
     <string name="post_menu_share">分享</string>
 
     <string name="post_search_hint">搜尋關鍵字&#8230;</string>

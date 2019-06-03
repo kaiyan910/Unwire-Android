@@ -2,51 +2,53 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/white"
-            android:elevation="@dimen/spacing_small">
+            android:background="?attr/appBackground">
 
-            <ImageView
-                android:id="@+id/iv_logo"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:background="@color/theme_color"
-                android:padding="@dimen/spacing_normal"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_logo_square_colored"
-                app:layout_constraintBottom_toBottomOf="@id/tab_layout"
-                app:layout_constraintDimensionRatio="1:1"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/tab_layout" />
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/collapsing_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:titleEnabled="false"
+                app:layout_scrollFlags="scroll|enterAlways">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:contentInsetStartWithNavigation="0dp"
+                    app:navigationIcon="@drawable/ic_circle_logo"
+                    app:title="@string/app_name"
+                    app:tabBackground="?attr/appComponentBackground"
+                    app:titleTextColor="@color/theme_color" />
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tab_layout"
                 style="@style/Widget.MaterialComponents.TabLayout"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/iv_logo"
-                app:layout_constraintTop_toTopOf="parent"
                 app:tabBackground="?attr/appComponentBackground"
                 app:tabIndicatorColor="@color/theme_color"
                 app:tabMode="scrollable"
                 app:tabSelectedTextColor="@color/theme_color"
                 app:tabTextColor="?attr/appInactive" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/view_pager"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-    </LinearLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </layout>

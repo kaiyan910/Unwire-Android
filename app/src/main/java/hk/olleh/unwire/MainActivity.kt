@@ -52,12 +52,6 @@ class MainActivity : AppCompatActivity() {
                             .navigate(R.id.postSelectionFragment)
                     }
 
-                    is MenuPage.Search -> {
-
-                        findNavController(R.id.nav_host_fragment)
-                            .navigate(R.id.postSearchFragment)
-                    }
-
                     is MenuPage.Mode -> {
 
                         val intent = Intent(this, MainActivity::class.java)
@@ -66,6 +60,7 @@ class MainActivity : AppCompatActivity() {
 
                         finish()
                     }
+
                     else -> {}
                 }
             })

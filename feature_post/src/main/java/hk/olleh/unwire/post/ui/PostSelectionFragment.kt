@@ -1,8 +1,6 @@
 package hk.olleh.unwire.post.ui
 
-import androidx.navigation.fragment.findNavController
 import hk.olleh.unwire.common.base.BaseFragment
-import hk.olleh.unwire.common.model.Post
 import hk.olleh.unwire.post.R
 import hk.olleh.unwire.post.databinding.FragmentPostSelectionBinding
 import org.koin.android.scope.currentScope
@@ -19,6 +17,15 @@ class PostSelectionFragment : BaseFragment<FragmentPostSelectionBinding>() {
         bindings
             ?.apply {
                 viewPager.adapter = pagerAdapter
+
+                toolbar
+                    .apply {
+                        inflateMenu(R.menu.menu_post)
+                        setOnMenuItemClickListener {
+                            true
+                        }
+                    }
+
                 tabLayout.setupWithViewPager(viewPager)
             }
     }
