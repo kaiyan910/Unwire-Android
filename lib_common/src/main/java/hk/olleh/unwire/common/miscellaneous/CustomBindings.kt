@@ -1,16 +1,20 @@
 package hk.olleh.unwire.common.miscellaneous
 
+import android.app.Activity
 import android.graphics.Color
 import android.os.Build
 import android.text.Html
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import android.webkit.WebView
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import hk.olleh.unwire.common.R
+import timber.log.Timber
 
 object CustomBindings {
 
@@ -18,22 +22,40 @@ object CustomBindings {
     @JvmStatic
     fun loadRemoteSource(view: ImageView, url: String?) {
 
+        Timber.d("[DEBUG] load remote image=[$url]")
+
         if (url != null) {
 
             Glide
                 .with(view.context)
                 .load(url)
                 .transition(DrawableTransitionOptions.withCrossFade())
-                .error(R.drawable.img_splashing_logo)
+                .error(hk.olleh.unwire.common.R.drawable.img_splashing_logo)
                 .into(view)
 
         } else {
 
             Glide
                 .with(view.context)
-                .load(R.drawable.img_splashing_logo)
+                .load(hk.olleh.unwire.common.R.drawable.img_splashing_logo)
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(view)
+        }
+    }
+
+    @BindingAdapter("onActionListener")
+    @JvmStatic
+    fun onActionListener(view: EditText, listener: (() -> Unit)?) {
+
+        view.setOnEditorActionListener { _, actionId, _ ->
+
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                Timber.d("[DEBUG] =123 called onActionListener")
+                listener?.invoke()
+                val imm = view.context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(view.windowToken, 0)
+            }
+            false
         }
     }
 

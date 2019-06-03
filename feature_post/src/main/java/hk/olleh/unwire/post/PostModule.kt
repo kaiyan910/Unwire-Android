@@ -7,6 +7,9 @@ import hk.olleh.unwire.post.ui.PostSelectionFragment
 import hk.olleh.unwire.post.ui.PostSelectionPagerAdapter
 import hk.olleh.unwire.post.useCase.GetPostUseCase
 import hk.olleh.unwire.post.useCase.GetPostUseCaseImpl
+import hk.olleh.unwire.post.useCase.SearchPostUseCase
+import hk.olleh.unwire.post.useCase.SearchPostUseCaseImpl
+import hk.olleh.unwire.post.viewModel.PostSearchViewModel
 import hk.olleh.unwire.post.viewModel.PostViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.viewmodel.dsl.viewModel
@@ -17,7 +20,13 @@ val postModule = module {
 
     factory<GetPostUseCase> { GetPostUseCaseImpl(get()) }
 
+    factory<SearchPostUseCase> { SearchPostUseCaseImpl(get()) }
+
+    factory { PostListAdapter() }
+
     viewModel { (category: String, isPro: Boolean) -> PostViewModel(get(), category, isPro) }
+
+    viewModel { PostSearchViewModel(get()) }
 
     scope(named<PostSelectionFragment>()) {
 
@@ -31,10 +40,5 @@ val postModule = module {
         scoped { (manager: FragmentManager) ->
             PostSelectionPagerAdapter(manager, get(named("POST_SELECTION_TABS_TITLE")))
         }
-    }
-
-    scope(named<PostFragment>()) {
-
-        scoped { PostListAdapter() }
     }
 }

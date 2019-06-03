@@ -1,50 +1,27 @@
 package hk.olleh.unwire.post.ui
 
-import android.content.Intent
-import android.os.Bundle
-import android.widget.LinearLayout.VERTICAL
+import android.widget.LinearLayout
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import hk.olleh.unwire.common.Constant
-import hk.olleh.unwire.common.argument
 import hk.olleh.unwire.common.base.BaseFragment
 import hk.olleh.unwire.common.miscellaneous.EndlessScrollingListener
 import hk.olleh.unwire.common.miscellaneous.Resource
 import hk.olleh.unwire.post.R
-import hk.olleh.unwire.post.databinding.FragmentPostBinding
-import hk.olleh.unwire.post.viewModel.PostViewModel
+import hk.olleh.unwire.post.databinding.FragmentPostSearchBinding
+import hk.olleh.unwire.post.viewModel.PostSearchViewModel
 import org.koin.android.ext.android.inject
-import org.koin.android.scope.currentScope
 import org.koin.android.viewmodel.ext.android.viewModel
-import org.koin.core.parameter.parametersOf
 
-class PostFragment : BaseFragment<FragmentPostBinding>() {
+class PostSearchFragment : BaseFragment<FragmentPostSearchBinding>() {
 
-    companion object {
-
-        const val ARGS_CATEGORY = "args_category"
-        const val ARGS_PRO = "args_pro"
-
-        fun create(category: String, isPro: Boolean = false) = PostFragment()
-            .apply {
-                arguments = bundleOf(
-                    ARGS_CATEGORY to category,
-                    ARGS_PRO to isPro
-                )
-            }
-    }
-
-    private val category by argument(ARGS_CATEGORY, "")
-    private val isPro by argument(ARGS_PRO, false)
-
-    private val viewModel by viewModel<PostViewModel> { parametersOf(category, isPro) }
+    private val viewModel by viewModel<PostSearchViewModel>()
 
     private val postListAdapter: PostListAdapter by inject()
 
-    override fun layout(): Int = R.layout.fragment_post
+    override fun layout(): Int = R.layout.fragment_post_search
 
     override fun afterViews() {
         super.afterViews()
@@ -60,20 +37,8 @@ class PostFragment : BaseFragment<FragmentPostBinding>() {
 
                             val bundle = bundleOf("post" to it)
 
-                            if (category == Constant.CATEGORY_TV) {
-
-                                activity?.apply {
-
-                                    val intent = Intent(this, PostVideoActivity::class.java)
-                                    intent.putExtras(bundle)
-                                    startActivity(intent)
-                                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
-                                }
-
-                            } else {
-                                findNavController()
-                                    .navigate(R.id.action_postSelectionFragment_to_postDetailsFragment, bundle)
-                            }
+                            findNavController()
+                                .navigate(R.id.action_postSelectionFragment_to_postDetailsFragment, bundle)
                         }
                     }
 
@@ -85,7 +50,7 @@ class PostFragment : BaseFragment<FragmentPostBinding>() {
                         layoutManager = LinearLayoutManager(context)
                         adapter = postListAdapter
 
-                        addItemDecoration(DividerItemDecoration(context, VERTICAL))
+                        addItemDecoration(DividerItemDecoration(context, LinearLayout.VERTICAL))
 
                         // set on scroll listener
                         addOnScrollListener(object : EndlessScrollingListener() {

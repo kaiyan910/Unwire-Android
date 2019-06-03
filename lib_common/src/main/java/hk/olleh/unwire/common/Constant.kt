@@ -4,6 +4,7 @@ object Constant {
 
     const val API_DATETIME_FORMAT = "yyyy-MM-ddTHH:mm:ss"
     const val HTML_IMG_REGEX = "<img[^>]+src=\"(.*?)\"[^>]*/>"
+    const val HTML_IMG_REGEX_2 = "<img[^>]+src=\"(.*?)\"[^>]*>"
     const val HTML_IFRAME_REGEX = "<iframe[^>]+src=\"(.*?)\"[^>]*></iframe>"
     const val VIDEO_REGEX = "https%3A%2F%2Fwww.facebook.com%2Funwirehk%2Fvideos%2F(.*?)%2F&#038;"
 

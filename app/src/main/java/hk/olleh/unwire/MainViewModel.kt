@@ -7,7 +7,6 @@ import hk.olleh.unwire.common.miscellaneous.Event
 import hk.olleh.unwire.preferences.PreferencesRepository
 import android.view.MenuItem
 
-
 sealed class MenuPage {
 
     object News: MenuPage()
@@ -23,19 +22,32 @@ class MainViewModel(
 
     val navigation: MutableLiveData<Event<MenuPage>> = MutableLiveData()
 
+    private var currentPage: MenuPage? = null
+
     fun onBottomMenuClicked(item: MenuItem): Boolean {
 
         when (item.itemId) {
+
             R.id.menu_news -> {
-                navigation.value = Event(MenuPage.News)
+
+                if (currentPage != MenuPage.News) {
+                    currentPage = MenuPage.News
+                    navigation.value = Event(MenuPage.News)
+                }
                 return true
             }
             R.id.menu_search -> {
-                navigation.value = Event(MenuPage.Search)
+                if (currentPage != MenuPage.Search) {
+                    currentPage = MenuPage.Search
+                    navigation.value = Event(MenuPage.Search)
+                }
                 return true
             }
             R.id.menu_bookmark -> {
-                navigation.value = Event(MenuPage.Bookmark)
+                if (currentPage != MenuPage.Bookmark) {
+                    currentPage = MenuPage.Bookmark
+                    navigation.value = Event(MenuPage.Bookmark)
+                }
                 return true
             }
             R.id.menu_mode -> {

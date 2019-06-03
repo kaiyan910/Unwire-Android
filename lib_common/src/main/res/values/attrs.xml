@@ -10,7 +10,10 @@
     <attr name="appBackground" format="color|reference" />
     <attr name="appToolbarClose" format="reference" />
     <attr name="appToolbarShare" format="reference" />
+    <attr name="appSearchBackground" format="reference" />
+    <attr name="appSearchIcon" format="reference" />
     <attr name="appTitle" format="color|reference" />
+    <attr name="appHint" format="color|reference" />
     <attr name="appText" format="color|reference" />
     <attr name="appComponentBackground" format="color|reference" />
     <attr name="appInactive" format="color|reference" />

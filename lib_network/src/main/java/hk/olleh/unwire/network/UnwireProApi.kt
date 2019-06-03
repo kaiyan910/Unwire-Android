@@ -18,6 +18,8 @@ interface UnwireProApi {
     @GET("${UnwireApi.PREFIX}/posts")
     fun getPostsByCategory(
         @Query("categories") category: String,
-        @Query("page") page: Int
+        @Query("page") page: Int,
+        @Query("search") search: String,
+        @Query("orderby") orderBy: String = "date"
     ): Deferred<List<PostResponse>>
 }

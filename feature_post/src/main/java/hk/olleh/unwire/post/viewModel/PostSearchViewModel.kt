@@ -7,15 +7,15 @@ import hk.olleh.unwire.common.base.BaseViewModel
 import hk.olleh.unwire.common.miscellaneous.ErrorState
 import hk.olleh.unwire.common.miscellaneous.Resource
 import hk.olleh.unwire.common.model.Post
-import hk.olleh.unwire.post.useCase.GetPostUseCase
+import hk.olleh.unwire.post.useCase.SearchPostUseCase
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
-class PostViewModel(
-    private val getPostUseCase: GetPostUseCase,
-    private val category: String,
-    private val isPro: Boolean
+class PostSearchViewModel(
+    private val searchPostUseCase: SearchPostUseCase
 ) : BaseViewModel() {
+
+    val keyword: MutableLiveData<String> = MutableLiveData()
 
     private val _posts: MutableLiveData<Resource<List<Post>>> = MutableLiveData()
     val posts: LiveData<Resource<List<Post>>> get() = _posts
@@ -25,34 +25,48 @@ class PostViewModel(
 
     private var page = 1
     private var canLoadMode = true
+    private var searhingKeyword = ""
 
     init {
-        getPosts(category, page, isPro)
+
+        _loading.value = false
     }
 
     fun loadMore() {
         if (canLoadMode) {
             page++
-            getPosts(category, page, isPro)
+            Timber.d("[DEBUG] =123 called loadMore()")
+            querySearchResult()
         }
     }
 
-    fun refresh() {
-
+    fun onClearKeyword() {
+        keyword.value = ""
         page = 1
+        searhingKeyword = ""
         _posts.value = Resource.Success(listOf())
-        getPosts(category, page, isPro)
     }
 
-    private fun getPosts(category: String, page: Int, isPro: Boolean) = viewModelScope
+    fun onSearch() {
+        page = 1
+        _posts.value = Resource.Success(listOf())
+        if (!keyword.value.isNullOrEmpty()) {
+            searhingKeyword = keyword.value!!
+            Timber.d("[DEBUG] =123 called onSearch()")
+            querySearchResult()
+        }
+    }
+
+    private fun querySearchResult() = viewModelScope
         .launch {
 
             try {
 
+                Timber.d("[DEBUG] =123 called querySearchResult()")
                 // show loading
                 _loading.postValue(true)
 
-                val posts = getPostUseCase.getPosts(category, page, isPro)
+                val posts = searchPostUseCase.getPosts("", page, searhingKeyword)
 
                 if (posts.isEmpty()) {
                     canLoadMode = false

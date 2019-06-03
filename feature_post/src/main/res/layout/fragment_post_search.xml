@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="View"
+            type="android.view.View" />
+
+        <variable
+            name="vm"
+            type="hk.olleh.unwire.post.viewModel.PostSearchViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/et_keyword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacing_large"
+                android:background="?attr/appSearchBackground"
+                android:drawablePadding="@dimen/spacing_large"
+                android:drawableStart="?attr/appSearchIcon"
+                android:hint="@string/post_search_hint"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:maxLines="1"
+                android:paddingBottom="@dimen/spacing_normal"
+                android:paddingEnd="@dimen/spacing_large"
+                android:paddingStart="@dimen/spacing_large"
+                android:paddingTop="@dimen/spacing_normal"
+                android:text="@={vm.keyword}"
+                android:textColor="?attr/appText"
+                android:textColorHint="?attr/appHint"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:onActionListener="@{() -> vm.onSearch()}"
+                tools:background="@drawable/bg_search_bar"
+                tools:drawableStart="@drawable/ic_search_dark"
+                tools:textColorHint="@color/grey_light" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginEnd="@dimen/spacing_large"
+                android:background="?attr/selectableItemBackground"
+                android:onClick="@{() -> vm.onClearKeyword()}"
+                android:padding="@dimen/spacing_small"
+                android:src="?attr/appToolbarClose"
+                app:layout_constraintBottom_toBottomOf="@id/et_keyword"
+                app:layout_constraintEnd_toEndOf="@id/et_keyword"
+                app:layout_constraintTop_toTopOf="@id/et_keyword" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:enabled="@{safeUnbox(vm.loading)}"
+            app:refreshing="@{safeUnbox(vm.loading)}">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_post"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fadingEdgeLength="@dimen/spacing_normal"
+                android:requiresFadingEdge="vertical" />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    </LinearLayout>
+
+</layout>

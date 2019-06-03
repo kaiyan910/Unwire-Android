@@ -29,4 +29,17 @@
             app:argType="hk.olleh.unwire.common.model.Post" />
     </fragment>
 
+    <fragment
+        android:id="@+id/postSearchFragment"
+        android:name="hk.olleh.unwire.post.ui.PostSearchFragment"
+        android:label="PostSearchFragment" >
+        <action
+            android:id="@+id/action_postSearchFragment_to_postDetailsFragment"
+            app:destination="@id/postDetailsFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+
 </navigation>

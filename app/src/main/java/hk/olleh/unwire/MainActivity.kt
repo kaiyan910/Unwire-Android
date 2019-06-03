@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
 import hk.olleh.unwire.common.miscellaneous.EventObserver
 import hk.olleh.unwire.databinding.ActivityMainBinding
 import hk.olleh.unwire.preferences.PreferencesRepository
@@ -44,6 +45,18 @@ class MainActivity : AppCompatActivity() {
             .observe(this, EventObserver {
 
                 when(it) {
+
+                    is MenuPage.News -> {
+
+                        findNavController(R.id.nav_host_fragment)
+                            .navigate(R.id.postSelectionFragment)
+                    }
+
+                    is MenuPage.Search -> {
+
+                        findNavController(R.id.nav_host_fragment)
+                            .navigate(R.id.postSearchFragment)
+                    }
 
                     is MenuPage.Mode -> {
 

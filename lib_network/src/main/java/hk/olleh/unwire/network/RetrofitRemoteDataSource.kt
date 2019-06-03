@@ -21,14 +21,19 @@ class RetrofitRemoteDataSource(
             .await()
     }
 
-    override suspend fun getPostsByCategory(category: String, page: Int, isPro: Boolean): List<PostResponse> = if (!isPro) {
+    override suspend fun getPostsByCategory(
+        category: String,
+        page: Int,
+        isPro: Boolean,
+        search: String
+    ): List<PostResponse> = if (!isPro) {
         api
-            .getPostsByCategory(category, page)
+            .getPostsByCategory(category, page, search)
             .await()
-    } else{
+    } else {
 
         proApi
-            .getPostsByCategory(category, page)
+            .getPostsByCategory(category, page, search)
             .await()
     }
 }

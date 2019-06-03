@@ -40,14 +40,19 @@ data class Post(
                     .rendered
                     .findFirstMatchPattern(Constant.HTML_IFRAME_REGEX)
                     ?.findFirstMatchPattern(Constant.VIDEO_REGEX)
+                    // try to get the thumbnail first
                     ?.let { "https://graph.facebook.com/$it/picture" }
+                    // if fail use first image pattern
+                    ?: res.content.rendered.findFirstMatchPattern(Constant.HTML_IMG_REGEX)
+                    // else use second pattern
+                    ?: res.content.rendered.findFirstMatchPattern(Constant.HTML_IMG_REGEX_2)
 
             } else {
 
-                res
-                    .content
-                    .rendered
-                    .findFirstMatchPattern(Constant.HTML_IMG_REGEX)
+                // first pattern <img />
+                res.content.rendered.findFirstMatchPattern(Constant.HTML_IMG_REGEX)
+                    // second pattern <img>
+                    ?: res.content.rendered.findFirstMatchPattern(Constant.HTML_IMG_REGEX_2)
             }
 
             return Post(

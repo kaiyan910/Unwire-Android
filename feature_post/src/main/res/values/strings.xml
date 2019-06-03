@@ -16,4 +16,7 @@
 
     <string name="post_menu_share">分享</string>
 
+    <string name="post_search_hint">搜尋關鍵字&#8230;</string>
+    <string name="post_search_result">關於 %1$s 的結果其有 %2$d 個</string>
+
 </resources>

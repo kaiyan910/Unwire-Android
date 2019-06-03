@@ -7,12 +7,19 @@ class CacheableRepository(
     private val remoteDataSource: RemoteDataSource
 ) : Repository {
 
-    override suspend fun getPosts(page: Int, isPro: Boolean): List<Post> = remoteDataSource
+    override suspend fun getPosts(
+        page: Int,
+        isPro: Boolean
+    ): List<Post> = remoteDataSource
         .getPosts(page, isPro)
         .map { Post.fromApi(it) }
 
-    override suspend fun getPostsByCategory(category: String, page: Int, isPro: Boolean): List<Post> =
-        remoteDataSource
-            .getPostsByCategory(category, page, isPro)
-            .map { Post.fromApi(it) }
+    override suspend fun getPostsByCategory(
+        category: String,
+        page: Int,
+        isPro: Boolean,
+        search: String
+    ): List<Post> = remoteDataSource
+        .getPostsByCategory(category, page, isPro, search)
+        .map { Post.fromApi(it) }
 }
