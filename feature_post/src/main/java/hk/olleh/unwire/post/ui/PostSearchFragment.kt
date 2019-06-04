@@ -54,7 +54,7 @@ class PostSearchFragment : BaseFragment<FragmentPostSearchBinding>() {
                         }
                     }
 
-                // set the refresh layout color sceheme
+                // set the refresh layout color scheme
                 swipeRefreshLayout.setColorSchemeResources(R.color.theme_color)
 
                 // set the recycler view

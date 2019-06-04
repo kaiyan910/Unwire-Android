@@ -4,9 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
+        <import type="android.view.View" />
+
         <variable
             name="dark"
             type="Boolean" />
+
         <variable
             name="post"
             type="hk.olleh.unwire.common.model.Post" />
@@ -23,10 +27,8 @@
             android:layout_height="wrap_content"
             android:background="?attr/appBackground"
             android:elevation="@dimen/spacing_normal"
-            app:popupTheme="@style/ThemeOverlay.MaterialComponents.Dark"
-            android:theme="@style/ThemeOverlay.MaterialComponents.Dark"
             app:contentInsetStartWithNavigation="0dp"
-            app:navigationIcon="?attr/appToolbarClose"
+            app:navigationIcon="?attr/appToolbarBack"
             app:subtitle="@{post.dateAgo}"
             app:subtitleTextColor="@color/grey"
             app:title="@{post.title}"
@@ -37,8 +39,11 @@
             android:id="@+id/web_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="?attr/appBackground"
+            android:visibility="@{post == null ? View.GONE : View.VISIBLE}"
             app:dark="@{safeUnbox(dark)}"
-            app:html="@{post.content}" />
+            app:html="@{post.content}"
+            tools:background="@color/black" />
 
     </LinearLayout>
 

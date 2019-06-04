@@ -13,13 +13,17 @@
         <action
             android:id="@+id/action_postSelectionFragment_to_postDetailsFragment"
             app:destination="@id/postDetailsFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
+            app:enterAnim="@anim/slide_in_from_right"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            app:popExitAnim="@anim/slide_out_to_right" />
         <action
             android:id="@+id/action_postSelectionFragment_to_postSearchFragment"
-            app:destination="@id/postSearchFragment" />
+            app:destination="@id/postSearchFragment"
+            app:enterAnim="@anim/slide_in_from_right"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/slide_out_to_right" />
     </fragment>
 
     <fragment
@@ -41,10 +45,10 @@
         <action
             android:id="@+id/action_postSearchFragment_to_postDetailsFragment"
             app:destination="@id/postDetailsFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
+            app:enterAnim="@anim/slide_in_from_right"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            app:popExitAnim="@anim/slide_out_to_right" />
         <argument
             android:name="keyword"
             app:argType="string" />

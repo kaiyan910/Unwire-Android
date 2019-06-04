@@ -54,9 +54,12 @@ class PostSelectionFragment : BaseFragment<FragmentPostSelectionBinding>() {
 
             override fun onQueryTextSubmit(query: String?): Boolean {
 
+                searchView.onActionViewCollapsed()
+
                 val bundle = bundleOf("keyword" to query)
                 findNavController()
                     .navigate(R.id.action_postSelectionFragment_to_postSearchFragment, bundle)
+
                 return false
             }
 

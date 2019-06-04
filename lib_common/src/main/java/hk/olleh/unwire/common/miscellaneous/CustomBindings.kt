@@ -98,10 +98,7 @@ object CustomBindings {
             "#000000"
         }
 
-        html
-            ?.let {
-
-                val data = """
+        val data = """
                     <html>
                         <head>
                             <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -117,15 +114,14 @@ object CustomBindings {
                                 }
                             </style>
                         </head>
-                        <body>$html</body>
+                        <body>${html ?: ""}</body>
                     </html>
                 """.trimIndent()
 
-                view
-                    .apply {
-                        settings.javaScriptEnabled = true
-                        loadDataWithBaseURL(null, data, "text/html", "UTF-8", null)
-                    }
+        view
+            .apply {
+                settings.javaScriptEnabled = true
+                loadDataWithBaseURL(null, data, "text/html", "UTF-8", null)
             }
     }
 }

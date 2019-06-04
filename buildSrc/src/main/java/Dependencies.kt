@@ -21,6 +21,7 @@ object Versions {
     const val ANDROIDX_MULTIDEX = "2.0.0"
     const val ANDROIDX_KTX = "1.0.0"
     const val ANDROIDX_KTX_VIEWMODEL = "2.2.0-alpha01"
+    const val ANDROIDX_KTX_LIFECYCLE = "2.2.0-alpha01"
     const val ANDROIDX_NAVIGATION = "2.0.0"
 
     const val MATERIAL = "1.0.0"
@@ -69,6 +70,7 @@ object Google {
     const val KTX_CORE = "androidx.core:core-ktx:${Versions.ANDROIDX_KTX}"
     const val KTX_FRAGMENT = "androidx.fragment:fragment-ktx:${Versions.ANDROIDX_KTX}"
     const val KTX_VIEWMODEL = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.ANDROIDX_KTX_VIEWMODEL}"
+    const val KTX_LIFECYCLE = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.ANDROIDX_KTX_LIFECYCLE}"
 
     const val DESIGN = "com.google.android.material:material:${Versions.MATERIAL}"
 

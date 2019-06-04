@@ -9,6 +9,7 @@
 
     <attr name="appBackground" format="color|reference" />
     <attr name="appToolbarClose" format="reference" />
+    <attr name="appToolbarBack" format="reference" />
     <attr name="appToolbarShare" format="reference" />
     <attr name="appSearchBackground" format="reference" />
     <attr name="appSearchIcon" format="reference" />

@@ -47,6 +47,7 @@ dependencies {
     kapt Google.LIFECYCLE_COMPILER
     implementation Google.KTX_CORE
     implementation Google.KTX_VIEWMODEL
+    implementation Google.KTX_LIFECYCLE
     implementation Google.DESIGN
 
     implementation Ui.RECYCLER_VIEW

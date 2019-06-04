@@ -1,6 +1,7 @@
 package hk.olleh.unwire.post.ui
 
 import android.content.Intent
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import hk.olleh.unwire.common.argument
 import hk.olleh.unwire.common.base.BaseFragment
@@ -8,6 +9,8 @@ import hk.olleh.unwire.common.model.Post
 import hk.olleh.unwire.post.R
 import hk.olleh.unwire.post.databinding.FragmentPostDetailsBinding
 import hk.olleh.unwire.preferences.PreferencesRepository
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 
 class PostDetailsFragment : BaseFragment<FragmentPostDetailsBinding>() {
