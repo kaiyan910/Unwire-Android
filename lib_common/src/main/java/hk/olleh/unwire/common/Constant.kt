@@ -2,7 +2,7 @@ package hk.olleh.unwire.common
 
 object Constant {
 
-    const val API_DATETIME_FORMAT = "yyyy-MM-ddTHH:mm:ss"
+    const val DATETIME_FORMAT = "yyyy-MM-dd HH:mm:ss"
     const val HTML_IMG_REGEX = "<img[^>]+src=\"(.*?)\"[^>]*/>"
     const val HTML_IMG_REGEX_2 = "<img[^>]+src=\"(.*?)\"[^>]*>"
     const val HTML_IFRAME_REGEX = "<iframe[^>]+src=\"(.*?)\"[^>]*></iframe>"

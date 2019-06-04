@@ -3,9 +3,9 @@ package hk.olleh.unwire.common.repository
 import hk.olleh.unwire.common.model.Post
 import hk.olleh.unwire.network.RemoteDataSource
 
-class CacheableRepository(
+class RetrofitRemoteRepository(
     private val remoteDataSource: RemoteDataSource
-) : Repository {
+) : RemoteRepository {
 
     override suspend fun getPosts(
         page: Int,

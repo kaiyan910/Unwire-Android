@@ -10,7 +10,6 @@ import android.view.MenuItem
 sealed class MenuPage {
 
     object News: MenuPage()
-    object Search: MenuPage()
     object Bookmark: MenuPage()
 
     data class Mode(val darkMode: Boolean): MenuPage()
@@ -33,13 +32,6 @@ class MainViewModel(
                 if (currentPage != MenuPage.News) {
                     currentPage = MenuPage.News
                     navigation.value = Event(MenuPage.News)
-                }
-                return true
-            }
-            R.id.menu_search -> {
-                if (currentPage != MenuPage.Search) {
-                    currentPage = MenuPage.Search
-                    navigation.value = Event(MenuPage.Search)
                 }
                 return true
             }

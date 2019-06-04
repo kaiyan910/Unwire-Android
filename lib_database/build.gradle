@@ -23,35 +23,14 @@ android {
         }
     }
 
-    dataBinding {
-        enabled = true
-    }
-
-}
-
-androidExtensions {
-    experimental = true
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation Kotlin.STANDARD
-    implementation Kotlin.ANDROID_EXTENSION_RUNTIME
-    implementation Google.APP_COMPAT
-    implementation Google.DESIGN
-    implementation Ui.RECYCLER_VIEW
     implementation Koin.ANDROID
-    implementation Glide.CORE
-    debugImplementation Utils.JODA_TIME
-    releaseImplementation Utils.JODA_TIME
-    implementation Utils.TIMBER
-    implementation project(":lib_network")
-    implementation project(":lib_database")
-    api project(":lib_preferences")
-
-    testImplementation Testing.MOCKITO
-    testImplementation Testing.JUNIT
-    testImplementation Testing.JUNIT_TIMBER
-    testImplementation Testing.JODA
+    implementation Room.CORE
+    kapt Room.COMPILER
+    implementation Room.KTX
 }

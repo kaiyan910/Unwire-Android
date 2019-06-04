@@ -1,1 +1,1 @@
-include ':app', ':lib_network', ':lib_preferences', ':lib_common', ':feature_post'
+include ':app', ':lib_network', ':lib_preferences', ':lib_common', ':feature_post', ':lib_database'

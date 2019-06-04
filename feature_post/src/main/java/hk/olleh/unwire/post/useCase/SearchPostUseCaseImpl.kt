@@ -1,13 +1,13 @@
 package hk.olleh.unwire.post.useCase
 
 import hk.olleh.unwire.common.model.Post
-import hk.olleh.unwire.common.repository.Repository
+import hk.olleh.unwire.common.repository.RemoteRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
 
 class SearchPostUseCaseImpl(
-    private val cacheableRepository: Repository
+    private val cacheableRepository: RemoteRepository
 ) : SearchPostUseCase {
 
     override suspend fun getPosts(

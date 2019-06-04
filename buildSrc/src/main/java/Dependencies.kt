@@ -24,6 +24,8 @@ object Versions {
     const val ANDROIDX_KTX_LIFECYCLE = "2.2.0-alpha01"
     const val ANDROIDX_NAVIGATION = "2.0.0"
 
+    const val ROOM = "2.1.0-rc01"
+    const val ROOM_COROUTINES = "2.1.0-alpha04"
     const val MATERIAL = "1.0.0"
 
     const val FIREBASE_CORE = "16.0.6"
@@ -45,6 +47,7 @@ object Versions {
     const val JUNIT = "4.12"
     const val MOCKIO = "2.1.0"
     const val JUNIT_TIMBER = "1.0.1"
+    const val JODA_TEST = "2.10.2"
 }
 
 object Kotlin {
@@ -76,6 +79,13 @@ object Google {
 
     const val NAVIGATION_FRAGMENT = "androidx.navigation:navigation-fragment-ktx:${Versions.ANDROIDX_NAVIGATION}"
     const val NAVIGATION_UI = "androidx.navigation:navigation-ui-ktx:${Versions.ANDROIDX_NAVIGATION}"
+}
+
+object Room {
+    const val CORE = "androidx.room:room-runtime:${Versions.ROOM}"
+    const val COMPILER = "androidx.room:room-compiler:${Versions.ROOM}"
+    const val COROUTINES = "androidx.room:room-coroutines:${Versions.ROOM_COROUTINES}"
+    const val KTX = "androidx.room:room-ktx:${Versions.ROOM}"
 }
 
 object Ui {
@@ -149,4 +159,5 @@ object Testing {
     const val LIFECYCLE = "androidx.arch.core:core-testing:${Versions.ANDROIDX_LIFECYCLE}"
     const val JUNIT = "junit:junit:${Versions.JUNIT}"
     const val JUNIT_TIMBER = "net.lachlanmckee:timber-junit-rule:${Versions.JUNIT_TIMBER}"
+    const val JODA = "joda-time:joda-time:${Versions.JODA_TEST}"
 }

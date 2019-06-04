@@ -8,8 +8,10 @@
 
         <item name="appToolbarClose">@drawable/ic_close</item>
         <item name="appToolbarShare">@drawable/ic_share</item>
-        <item name="appSearchBackground">@drawable/bg_search_bar</item>
+        <item name="appToolbarBookmark">@drawable/ic_bookmark</item>
+        <item name="appToolbarBookmarkOutline">@drawable/ic_bookmark_outline</item>
         <item name="appToolbarBack">@drawable/ic_back</item>
+        <item name="appSearchBackground">@drawable/bg_search_bar</item>
         <item name="appSearchIcon">@drawable/ic_search</item>
         <item name="appBackground">@android:color/white</item>
         <item name="appComponentBackground">@android:color/white</item>
@@ -27,8 +29,10 @@
 
         <item name="appToolbarClose">@drawable/ic_close_dark</item>
         <item name="appToolbarShare">@drawable/ic_share_dark</item>
-        <item name="appSearchBackground">@drawable/bg_search_bar_dark</item>
+        <item name="appToolbarBookmark">@drawable/ic_bookmark_dark</item>
+        <item name="appToolbarBookmarkOutline">@drawable/ic_bookmark_outline_dark</item>
         <item name="appToolbarBack">@drawable/ic_back_dark</item>
+        <item name="appSearchBackground">@drawable/bg_search_bar_dark</item>
         <item name="appSearchIcon">@drawable/ic_search_dark</item>
         <item name="appBackground">@android:color/black</item>
         <item name="appComponentBackground">@android:color/black</item>

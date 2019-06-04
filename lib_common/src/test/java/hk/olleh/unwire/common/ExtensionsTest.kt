@@ -2,6 +2,7 @@ package hk.olleh.unwire.common
 
 import android.util.Log
 import net.lachlanmckee.timberjunit.TimberTestRule
+import org.joda.time.DateTimeUtils
 import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
@@ -36,5 +37,20 @@ class ExtensionsTest {
         Timber.d("[DEBUG] result=$result")
 
         assertTrue(result == "https://cdn.unwire.hk/wp-content/uploads/2019/05/WWDC2019-1-694x384.png")
+    }
+
+    @Test
+    fun testDateTimePattern() {
+
+        DateTimeUtils.setCurrentMillisFixed(1559642400000)
+
+        val mockDateTime = "2019-06-04 18:00:00"
+
+        val millis = mockDateTime
+            .toDateTime(Constant.DATETIME_FORMAT)
+            ?.millis
+            ?: 0L
+
+        assertTrue(millis == 1559642400000)
     }
 }

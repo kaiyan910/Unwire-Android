@@ -2,7 +2,7 @@ package hk.olleh.unwire.common.repository
 
 import hk.olleh.unwire.common.model.Post
 
-interface Repository {
+interface RemoteRepository {
 
     suspend fun getPosts(page: Int, isPro: Boolean): List<Post>
 
