@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import hk.olleh.unwire.common.argument
 import hk.olleh.unwire.common.base.BaseFragment
 import hk.olleh.unwire.common.miscellaneous.EndlessScrollingListener
 import hk.olleh.unwire.common.miscellaneous.Resource
@@ -14,10 +15,13 @@ import hk.olleh.unwire.post.databinding.FragmentPostSearchBinding
 import hk.olleh.unwire.post.viewModel.PostSearchViewModel
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class PostSearchFragment : BaseFragment<FragmentPostSearchBinding>() {
 
-    private val viewModel by viewModel<PostSearchViewModel>()
+    private val keyword by argument<String>("keyword")
+
+    private val viewModel by viewModel<PostSearchViewModel> { parametersOf(keyword) }
 
     private val postListAdapter: PostListAdapter by inject()
 
@@ -28,9 +32,17 @@ class PostSearchFragment : BaseFragment<FragmentPostSearchBinding>() {
 
         bindings
             ?.apply {
+
                 // set the view model
                 vm = viewModel
 
+                // setup toolbar
+                toolbar
+                    .apply {
+                        setNavigationOnClickListener { findNavController().popBackStack() }
+                    }
+
+                // setup post recycler view adapter
                 postListAdapter
                     .apply {
                         onItemClickListener = {
@@ -38,10 +50,11 @@ class PostSearchFragment : BaseFragment<FragmentPostSearchBinding>() {
                             val bundle = bundleOf("post" to it)
 
                             findNavController()
-                                .navigate(R.id.action_postSelectionFragment_to_postDetailsFragment, bundle)
+                                .navigate(R.id.action_postSearchFragment_to_postDetailsFragment, bundle)
                         }
                     }
 
+                // set the refresh layout color sceheme
                 swipeRefreshLayout.setColorSchemeResources(R.color.theme_color)
 
                 // set the recycler view

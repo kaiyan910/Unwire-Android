@@ -17,6 +17,7 @@
     </string-array>
 
     <string name="post_menu_search">搜尋</string>
+    <string name="post_menu_search_keyboard">搜尋「 %s 」</string>
     <string name="post_menu_share">分享</string>
 
     <string name="post_search_hint">搜尋關鍵字&#8230;</string>

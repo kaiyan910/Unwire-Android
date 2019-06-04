@@ -15,8 +15,8 @@
                 android:id="@+id/collapsing_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:titleEnabled="false"
-                app:layout_scrollFlags="scroll|enterAlways">
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:titleEnabled="false">
 
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
@@ -24,8 +24,8 @@
                     android:layout_height="wrap_content"
                     app:contentInsetStartWithNavigation="0dp"
                     app:navigationIcon="@drawable/ic_circle_logo"
-                    app:title="@string/app_name"
                     app:tabBackground="?attr/appComponentBackground"
+                    app:title="@string/app_name"
                     app:titleTextColor="@color/theme_color" />
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>

@@ -12,10 +12,9 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class PostSearchViewModel(
+    val keyword: String,
     private val searchPostUseCase: SearchPostUseCase
 ) : BaseViewModel() {
-
-    val keyword: MutableLiveData<String> = MutableLiveData()
 
     private val _posts: MutableLiveData<Resource<List<Post>>> = MutableLiveData()
     val posts: LiveData<Resource<List<Post>>> get() = _posts
@@ -25,34 +24,16 @@ class PostSearchViewModel(
 
     private var page = 1
     private var canLoadMode = true
-    private var searhingKeyword = ""
 
     init {
 
         _loading.value = false
+        querySearchResult()
     }
 
     fun loadMore() {
         if (canLoadMode) {
             page++
-            Timber.d("[DEBUG] =123 called loadMore()")
-            querySearchResult()
-        }
-    }
-
-    fun onClearKeyword() {
-        keyword.value = ""
-        page = 1
-        searhingKeyword = ""
-        _posts.value = Resource.Success(listOf())
-    }
-
-    fun onSearch() {
-        page = 1
-        _posts.value = Resource.Success(listOf())
-        if (!keyword.value.isNullOrEmpty()) {
-            searhingKeyword = keyword.value!!
-            Timber.d("[DEBUG] =123 called onSearch()")
             querySearchResult()
         }
     }
@@ -62,11 +43,10 @@ class PostSearchViewModel(
 
             try {
 
-                Timber.d("[DEBUG] =123 called querySearchResult()")
                 // show loading
                 _loading.postValue(true)
 
-                val posts = searchPostUseCase.getPosts("", page, searhingKeyword)
+                val posts = searchPostUseCase.getPosts("", page, keyword)
 
                 if (posts.isEmpty()) {
                     canLoadMode = false

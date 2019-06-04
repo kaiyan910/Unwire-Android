@@ -5,8 +5,4 @@
         <item name="android:windowTranslucentStatus">true</item>
     </style>
 
-    <style name="AppTheme.Toolbar" parent="TextAppearance.Design.CollapsingToolbar.Expanded">
-        <item name="android:textColor">@color/theme_color</item>
-    </style>
-
 </resources>

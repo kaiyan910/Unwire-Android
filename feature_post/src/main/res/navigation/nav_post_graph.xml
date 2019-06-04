@@ -17,6 +17,9 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_postSelectionFragment_to_postSearchFragment"
+            app:destination="@id/postSearchFragment" />
     </fragment>
 
     <fragment
@@ -32,7 +35,9 @@
     <fragment
         android:id="@+id/postSearchFragment"
         android:name="hk.olleh.unwire.post.ui.PostSearchFragment"
+        tools:layout="@layout/fragment_post_search"
         android:label="PostSearchFragment" >
+
         <action
             android:id="@+id/action_postSearchFragment_to_postDetailsFragment"
             app:destination="@id/postDetailsFragment"
@@ -40,6 +45,9 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <argument
+            android:name="keyword"
+            app:argType="string" />
     </fragment>
 
 </navigation>

@@ -17,9 +17,13 @@ class SearchPostUseCaseImpl(
     ): List<Post> = withContext(Dispatchers.IO) {
 
         // get Unwire's post
-        val unwirePosts = async { cacheableRepository.getPostsByCategory(category, page, false, search) }
+        val unwirePosts = async {
+            cacheableRepository.getPostsByCategory(category, page, false, search)
+        }
         // get Unwire Pro's post
-        val unwireProPosts = async { cacheableRepository.getPostsByCategory(category, page, true, search) }
+        val unwireProPosts = async {
+            cacheableRepository.getPostsByCategory(category, page, true, search)
+        }
 
         // merge two results
         mutableListOf<Post>()

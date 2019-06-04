@@ -26,7 +26,7 @@ val postModule = module {
 
     viewModel { (category: String, isPro: Boolean) -> PostViewModel(get(), category, isPro) }
 
-    viewModel { PostSearchViewModel(get()) }
+    viewModel { (keyword: String) -> PostSearchViewModel(keyword, get()) }
 
     scope(named<PostSelectionFragment>()) {
 
