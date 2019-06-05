@@ -4,6 +4,14 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: "androidx.navigation.safeargs.kotlin"
 apply plugin: 'kotlin-kapt'
 
+// workaround for merging navigation graph
+// https://issuetracker.google.com/issues/112513722
+task copyChildNavigationGraphs(type: Copy) {
+    from '../feature_post/src/main/res/navigation'
+    into 'src/main/res/navigation'
+}
+preBuild.dependsOn copyChildNavigationGraphs
+
 android {
     compileSdkVersion Versions.COMPILE_SDK
     defaultConfig {

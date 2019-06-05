@@ -26,7 +26,11 @@
 
         <activity
             android:name=".MainActivity"
-            android:theme="@style/AppTheme.LightStatus.Dark" />
+            android:theme="@style/AppTheme.LightStatus.Dark">
+
+            <nav-graph android:value="@navigation/nav_graph" />
+
+        </activity>
 
     </application>
 

@@ -16,6 +16,9 @@ interface UnwireProApi {
     fun getPosts(@Query("page") page: Int): Deferred<List<PostResponse>>
 
     @GET("${UnwireApi.PREFIX}/posts")
+    fun getPostBySlug(@Query("slug") slug: String): Deferred<List<PostResponse>>
+
+    @GET("${UnwireApi.PREFIX}/posts")
     fun getPostsByCategory(
         @Query("categories") category: String,
         @Query("page") page: Int,

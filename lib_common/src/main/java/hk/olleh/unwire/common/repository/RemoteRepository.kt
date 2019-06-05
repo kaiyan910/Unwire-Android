@@ -6,6 +6,8 @@ interface RemoteRepository {
 
     suspend fun getPosts(page: Int, isPro: Boolean): List<Post>
 
+    suspend fun getPostBySlug(slug: String): Post?
+
     suspend fun getPostsByCategory(
         category: String,
         page: Int,

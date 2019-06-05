@@ -34,6 +34,9 @@
         <argument
             android:name="post"
             app:argType="hk.olleh.unwire.common.model.Post" />
+        <deepLink
+            android:id="@+id/deepLink"
+            app:uri="https://unwire.hk/.*/.*/.*/{slug}/.*/" />
     </fragment>
 
     <fragment

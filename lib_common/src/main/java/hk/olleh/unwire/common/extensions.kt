@@ -32,6 +32,9 @@ fun <T> AppCompatActivity.extras(key: String, defaultValue: T) = lazy {
 fun <T> Fragment.argument(key: String) =
     lazy { arguments?.get(key) as T ?: throw IllegalArgumentException("$key is required.") }
 
+fun <T> Fragment.argumentOrNull(key: String) =
+    lazy { arguments?.get(key) as? T }
+
 fun <T> Fragment.argument(key: String, defaultValue: T) = lazy {
     arguments?.get(key) as? T ?: defaultValue
 }

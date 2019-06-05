@@ -11,6 +11,8 @@ import hk.olleh.unwire.post.useCase.CheckPostBookmarkUseCase
 import hk.olleh.unwire.post.useCase.CheckPostBookmarkUseCaseImpl
 import hk.olleh.unwire.post.useCase.GetBookmarkPostUseCase
 import hk.olleh.unwire.post.useCase.GetBookmarkPostUseCaseImpl
+import hk.olleh.unwire.post.useCase.GetPostBySlugUseCase
+import hk.olleh.unwire.post.useCase.GetPostBySlugUseCaseImpl
 import hk.olleh.unwire.post.useCase.GetPostUseCase
 import hk.olleh.unwire.post.useCase.GetPostUseCaseImpl
 import hk.olleh.unwire.post.useCase.SearchPostUseCase
@@ -36,9 +38,11 @@ val postModule = module {
 
     factory<GetBookmarkPostUseCase> { GetBookmarkPostUseCaseImpl(get()) }
 
+    factory<GetPostBySlugUseCase> { GetPostBySlugUseCaseImpl(get()) }
+
     factory { PostListAdapter() }
 
-    viewModel { (post: Post) -> PostDetailsViewModel(post, get(), get()) }
+    viewModel { (post: Post?, slug: String?) -> PostDetailsViewModel(post, slug, get(), get(), get()) }
 
     viewModel { (category: String, isPro: Boolean) -> PostViewModel(get(), category, isPro) }
 

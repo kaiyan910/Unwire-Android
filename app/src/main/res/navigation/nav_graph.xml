@@ -1,19 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/postNavigation">
-
-    <!--<fragment
-        android:id="@+id/mainFragment"
-        android:name="hk.olleh.unwire.MainFragment"
-        tools:layout="@layout/fragment_main"
-        android:label="MainFragment" >
-        <action
-            android:id="@+id/action_mainFragment_to_postNavigation"
-            app:destination="@id/postNavigation" />
-    </fragment>-->
 
     <include app:graph="@navigation/nav_post_graph" />
 

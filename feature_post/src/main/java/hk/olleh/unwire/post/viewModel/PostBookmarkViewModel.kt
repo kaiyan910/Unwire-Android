@@ -10,7 +10,6 @@ import hk.olleh.unwire.common.model.Post
 import hk.olleh.unwire.post.useCase.GetBookmarkPostUseCase
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import java.util.Collections.addAll
 
 class PostBookmarkViewModel(
     private val getBookmarkPostUseCase: GetBookmarkPostUseCase
@@ -38,53 +37,49 @@ class PostBookmarkViewModel(
         }
     }
 
-    fun getBookmark(keyword: String, resetPage: Boolean) {
+    fun getBookmark(keyword: String, resetPage: Boolean) = viewModelScope
+        .launch {
 
-        viewModelScope
-            .launch {
+            try {
 
-                try {
+                // show loading
+                _loading.postValue(true)
 
-                    // show loading
-                    _loading.postValue(true)
-
-                    if (resetPage) {
-                        currentKeyword = keyword
-                        page = 0
-                    }
-
-                    val posts = getBookmarkPostUseCase.getBookmarkPost(page, keyword)
-
-                    if (posts.isEmpty()) {
-                        canLoadMode = false
-                    }
-
-                    val newList = when (_posts.value) {
-                        is Resource.Success -> (_posts.value as Resource.Success).data.toMutableList()
-                            .apply {
-                                if (resetPage) {
-                                    clear()
-                                }
-                                addAll(posts)
-                            }
-                            .toList()
-
-                        else -> posts
-                    }
-
-                    _posts.postValue(Resource.Success(newList))
-
-                } catch (e: Exception) {
-
-                    Timber.e(e)
-                    _posts.postValue(Resource.Error(ErrorState("")))
-
-                } finally {
-
-                    // hide loading
-                    _loading.postValue(false)
+                if (resetPage) {
+                    currentKeyword = keyword
+                    page = 0
                 }
-            }
 
-    }
+                val posts = getBookmarkPostUseCase.getBookmarkPost(page, keyword)
+
+                if (posts.isEmpty()) {
+                    canLoadMode = false
+                }
+
+                val newList = when (_posts.value) {
+                    is Resource.Success -> (_posts.value as Resource.Success).data.toMutableList()
+                        .apply {
+                            if (resetPage) {
+                                clear()
+                            }
+                            addAll(posts)
+                        }
+                        .toList()
+
+                    else -> posts
+                }
+
+                _posts.postValue(Resource.Success(newList))
+
+            } catch (e: Exception) {
+
+                Timber.e(e)
+                _posts.postValue(Resource.Error(ErrorState("")))
+
+            } finally {
+
+                // hide loading
+                _loading.postValue(false)
+            }
+        }
 }

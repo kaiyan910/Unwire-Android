@@ -12,8 +12,8 @@
             type="Boolean" />
 
         <variable
-            name="post"
-            type="hk.olleh.unwire.common.model.Post" />
+            name="vm"
+            type="hk.olleh.unwire.post.viewModel.PostDetailsViewModel" />
     </data>
 
     <LinearLayout
@@ -29,9 +29,9 @@
             android:elevation="@dimen/spacing_normal"
             app:contentInsetStartWithNavigation="0dp"
             app:navigationIcon="?attr/appToolbarBack"
-            app:subtitle="@{post.dateAgo}"
+            app:subtitle="@{vm.post.dateAgo}"
             app:subtitleTextColor="@color/grey"
-            app:title="@{post.title}"
+            app:title="@{vm.post.title}"
             app:titleTextColor="@color/theme_color"
             tools:navigationIcon="@drawable/ic_close" />
 
@@ -39,17 +39,17 @@
             android:id="@+id/swipe_refresh_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:refreshing="@{post == null}"
-            app:enabled="@{post == null}">
+            app:refreshing="@{safeUnbox(vm.loading)}"
+            app:enabled="@{safeUnbox(vm.loading)}">
 
             <WebView
                 android:id="@+id/web_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="?attr/appBackground"
-                android:visibility="@{post == null ? View.GONE : View.VISIBLE}"
+                android:visibility="@{safeUnbox(vm.loading) ? View.GONE : View.VISIBLE}"
                 app:dark="@{safeUnbox(dark)}"
-                app:html="@{post.content}"
+                app:html="@{vm.post.content}"
                 tools:background="@color/black" />
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

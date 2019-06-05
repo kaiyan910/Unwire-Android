@@ -14,6 +14,11 @@ class RetrofitRemoteRepository(
         .getPosts(page, isPro)
         .map { Post.fromApi(it) }
 
+    override suspend fun getPostBySlug(slug: String): Post? =
+        remoteDataSource
+            .getPostBySlug(slug)
+            ?.let { Post.fromApi(it) }
+
     override suspend fun getPostsByCategory(
         category: String,
         page: Int,

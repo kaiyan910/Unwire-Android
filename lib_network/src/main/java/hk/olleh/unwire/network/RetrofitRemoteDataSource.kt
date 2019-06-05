@@ -7,7 +7,6 @@ class RetrofitRemoteDataSource(
     private val proApi: UnwireProApi
 ) : RemoteDataSource {
 
-
     override suspend fun getPosts(page: Int, isPro: Boolean): List<PostResponse> = if (!isPro) {
 
         api
@@ -20,6 +19,12 @@ class RetrofitRemoteDataSource(
             .getPosts(page)
             .await()
     }
+
+    override suspend fun getPostBySlug(slug: String): PostResponse? =
+        api
+            .getPostBySlug(slug)
+            .await()
+            .firstOrNull()
 
     override suspend fun getPostsByCategory(
         category: String,
