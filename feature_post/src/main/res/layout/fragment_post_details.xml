@@ -35,15 +35,24 @@
             app:titleTextColor="@color/theme_color"
             tools:navigationIcon="@drawable/ic_close" />
 
-        <WebView
-            android:id="@+id/web_view"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="?attr/appBackground"
-            android:visibility="@{post == null ? View.GONE : View.VISIBLE}"
-            app:dark="@{safeUnbox(dark)}"
-            app:html="@{post.content}"
-            tools:background="@color/black" />
+            app:refreshing="@{post == null}"
+            app:enabled="@{post == null}">
+
+            <WebView
+                android:id="@+id/web_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?attr/appBackground"
+                android:visibility="@{post == null ? View.GONE : View.VISIBLE}"
+                app:dark="@{safeUnbox(dark)}"
+                app:html="@{post.content}"
+                tools:background="@color/black" />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     </LinearLayout>
 

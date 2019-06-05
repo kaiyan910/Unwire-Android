@@ -39,8 +39,8 @@
     <fragment
         android:id="@+id/postSearchFragment"
         android:name="hk.olleh.unwire.post.ui.PostSearchFragment"
-        tools:layout="@layout/fragment_post_search"
-        android:label="PostSearchFragment" >
+        android:label="PostSearchFragment"
+        tools:layout="@layout/fragment_post_search">
 
         <action
             android:id="@+id/action_postSearchFragment_to_postDetailsFragment"
@@ -52,6 +52,19 @@
         <argument
             android:name="keyword"
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/postBookmarkFragment"
+        android:name="hk.olleh.unwire.post.ui.PostBookmarkFragment"
+        android:label="PostBookmarkFragment"
+        tools:layout="@layout/fragment_post_bookmark">
+        <action
+            android:id="@+id/action_postBookmarkFragment_to_postDetailsFragment"
+            app:destination="@id/postDetailsFragment"
+            app:enterAnim="@anim/slide_in_from_right"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/slide_out_to_right" />
     </fragment>
 
 </navigation>

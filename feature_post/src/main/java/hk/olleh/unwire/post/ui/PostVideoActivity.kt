@@ -13,9 +13,11 @@ import timber.log.Timber
 
 class PostVideoActivity : AppCompatActivity() {
 
-    private val item: Post by extras("post")
+    private val item: Post
+            by extras("post")
 
     private lateinit var chromeClient: VideoFullscreenWebChromeClient
+
     private lateinit var bindings: ActivityPostVideoBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

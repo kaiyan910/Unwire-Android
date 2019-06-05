@@ -12,7 +12,8 @@ import timber.log.Timber
 
 class PostSelectionFragment : BaseFragment<FragmentPostSelectionBinding>() {
 
-    private val pagerAdapter by currentScope.inject<PostSelectionPagerAdapter> { parametersOf(childFragmentManager) }
+    private val pagerAdapter
+            by currentScope.inject<PostSelectionPagerAdapter> { parametersOf(childFragmentManager) }
 
     private lateinit var searchView: SearchView
 

@@ -1,7 +1,8 @@
 package hk.olleh.unwire.post.ui
 
+import android.animation.Animator
+import android.animation.ObjectAnimator
 import android.content.Intent
-import android.os.Bundle
 import android.widget.LinearLayout.VERTICAL
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
@@ -17,9 +18,9 @@ import hk.olleh.unwire.post.R
 import hk.olleh.unwire.post.databinding.FragmentPostBinding
 import hk.olleh.unwire.post.viewModel.PostViewModel
 import org.koin.android.ext.android.inject
-import org.koin.android.scope.currentScope
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
+
 
 class PostFragment : BaseFragment<FragmentPostBinding>() {
 
@@ -37,12 +38,17 @@ class PostFragment : BaseFragment<FragmentPostBinding>() {
             }
     }
 
-    private val category by argument(ARGS_CATEGORY, "")
-    private val isPro by argument(ARGS_PRO, false)
+    private val category
+            by argument(ARGS_CATEGORY, "")
 
-    private val viewModel by viewModel<PostViewModel> { parametersOf(category, isPro) }
+    private val isPro
+            by argument(ARGS_PRO, false)
 
-    private val postListAdapter: PostListAdapter by inject()
+    private val viewModel
+            by viewModel<PostViewModel> { parametersOf(category, isPro) }
+
+    private val postListAdapter: PostListAdapter
+            by inject()
 
     override fun layout(): Int = R.layout.fragment_post
 
@@ -72,7 +78,10 @@ class PostFragment : BaseFragment<FragmentPostBinding>() {
 
                             } else {
                                 findNavController()
-                                    .navigate(R.id.action_postSelectionFragment_to_postDetailsFragment, bundle)
+                                    .navigate(
+                                        R.id.action_postSelectionFragment_to_postDetailsFragment,
+                                        bundle
+                                    )
                             }
                         }
                     }
@@ -95,6 +104,15 @@ class PostFragment : BaseFragment<FragmentPostBinding>() {
                         })
                     }
             }
+    }
+
+    override fun onCreateAnimator(transit: Int, enter: Boolean, nextAnim: Int): Animator {
+
+        // Fix for disappear while parent fragment is in transition
+        val objectAnimator = ObjectAnimator.ofFloat(view, "alpha", 1F, 1F)
+        //time same with parent fragment's animation
+        objectAnimator.duration = 333
+        return objectAnimator
     }
 
     override fun observe() {

@@ -1,51 +1,41 @@
 package hk.olleh.unwire.post.ui
 
 import android.widget.LinearLayout
+import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import hk.olleh.unwire.common.argument
 import hk.olleh.unwire.common.base.BaseFragment
 import hk.olleh.unwire.common.miscellaneous.EndlessScrollingListener
 import hk.olleh.unwire.common.miscellaneous.Resource
 import hk.olleh.unwire.post.R
-import hk.olleh.unwire.post.databinding.FragmentPostSearchBinding
-import hk.olleh.unwire.post.viewModel.PostSearchViewModel
+import hk.olleh.unwire.post.databinding.FragmentPostBookmarkBinding
+import hk.olleh.unwire.post.viewModel.PostBookmarkViewModel
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
-import org.koin.core.parameter.parametersOf
+import timber.log.Timber
 
-class PostSearchFragment : BaseFragment<FragmentPostSearchBinding>() {
+class PostBookmarkFragment : BaseFragment<FragmentPostBookmarkBinding>() {
 
-    private val keyword
-            by argument<String>("keyword")
-
-    private val viewModel
-            by viewModel<PostSearchViewModel> { parametersOf(keyword) }
+    private val viewModel: PostBookmarkViewModel
+            by viewModel()
 
     private val postListAdapter: PostListAdapter
             by inject()
 
-    override fun layout(): Int = R.layout.fragment_post_search
+    private lateinit var searchView: SearchView
+
+    override fun layout(): Int = R.layout.fragment_post_bookmark
 
     override fun afterViews() {
         super.afterViews()
-
         bindings
             ?.apply {
-
                 // set the view model
                 vm = viewModel
 
-                // setup toolbar
-                toolbar
-                    .apply {
-                        setNavigationOnClickListener { findNavController().popBackStack() }
-                    }
-
-                // setup post recycler view adapter
                 postListAdapter
                     .apply {
                         onItemClickListener = {
@@ -53,12 +43,34 @@ class PostSearchFragment : BaseFragment<FragmentPostSearchBinding>() {
                             val bundle = bundleOf("post" to it)
 
                             findNavController()
-                                .navigate(R.id.action_postSearchFragment_to_postDetailsFragment, bundle)
+                                .navigate(
+                                    R.id.action_postBookmarkFragment_to_postDetailsFragment,
+                                    bundle
+                                )
                         }
                     }
 
-                // set the refresh layout color scheme
                 swipeRefreshLayout.setColorSchemeResources(R.color.theme_color)
+
+                toolbar
+                    .apply {
+
+                        // setup the menu
+                        inflateMenu(R.menu.menu_post)
+
+                        // grab the search view for reference
+                        searchView = menu
+                            .findItem(R.id.menu_search)
+                            .actionView as SearchView
+
+                        setupSearchView(searchView)
+
+                        // setup the on menu click listener
+                        setOnMenuItemClickListener {
+                            searchView.onActionViewExpanded()
+                            false
+                        }
+                    }
 
                 // set the recycler view
                 rvPost
@@ -89,5 +101,31 @@ class PostSearchFragment : BaseFragment<FragmentPostSearchBinding>() {
                     }
                 }
             })
+    }
+
+    private fun setupSearchView(searchView: SearchView) {
+
+        searchView
+            .apply {
+
+                setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+
+                    override fun onQueryTextSubmit(text: String): Boolean {
+
+                        viewModel.getBookmark(text, true)
+                        return false
+                    }
+
+                    override fun onQueryTextChange(text: String): Boolean {
+
+                        if (text.isEmpty()) {
+                            viewModel.getBookmark("", true)
+                        }
+
+                        return false
+                    }
+                })
+            }
+
     }
 }

@@ -52,6 +52,12 @@ class MainActivity : AppCompatActivity() {
                             .navigate(R.id.postSelectionFragment)
                     }
 
+                    is MenuPage.Bookmark -> {
+
+                        findNavController(R.id.nav_host_fragment)
+                            .navigate(R.id.postBookmarkFragment)
+                    }
+
                     is MenuPage.Mode -> {
 
                         val intent = Intent(this, MainActivity::class.java)

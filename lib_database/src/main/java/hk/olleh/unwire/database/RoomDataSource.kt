@@ -6,9 +6,9 @@ class RoomDataSource(
     private val database: AppDatabase
 ) : DatabaseDataSource {
 
-    override suspend fun getBookmark(page: Int, limit: Int) = database
+    override suspend fun getBookmark(page: Int, limit: Int, keyword: String) = database
             .bookmarkDao()
-            .getBookmarkWithPaging(page * limit, limit)
+            .getBookmarkWithPaging(page * limit, limit, keyword)
 
     override suspend fun delete(remoteId: Long) = database
         .bookmarkDao()

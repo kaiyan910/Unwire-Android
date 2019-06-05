@@ -7,9 +7,9 @@ class RoomDatabaseRepository(
     private val dataSource: DatabaseDataSource
 ) : DatabaseRepository {
 
-    override suspend fun getBookmark(page: Int, limit: Int): List<Post> =
+    override suspend fun getBookmark(page: Int, limit: Int, keyword: String): List<Post> =
         dataSource
-            .getBookmark(page, limit)
+            .getBookmark(page, limit, keyword)
             .map { Post.fromDatabase(it) }
 
     override suspend fun insert(post: Post) =

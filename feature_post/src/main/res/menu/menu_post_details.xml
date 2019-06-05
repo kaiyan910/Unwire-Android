@@ -3,14 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/menu_bookmark_remove"
-        android:icon="?attr/appToolbarBookmarkOutline"
-        android:title="@string/post_menu_bookmark_remove"
-        app:showAsAction="ifRoom" />
-
-    <item
         android:id="@+id/menu_bookmark"
-        android:icon="?attr/appToolbarBookmark"
+        android:icon="?attr/appToolbarBookmarkOutline"
         android:title="@string/post_menu_bookmark"
         app:showAsAction="ifRoom" />
 

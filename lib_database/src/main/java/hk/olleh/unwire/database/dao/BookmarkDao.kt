@@ -9,8 +9,8 @@ import hk.olleh.unwire.database.entity.BookmarkEntity
 @Dao
 interface BookmarkDao {
 
-    @Query("SELECT * FROM bookmark LIMIT :limit OFFSET :offset")
-    fun getBookmarkWithPaging(offset: Int, limit: Int): List<BookmarkEntity>
+    @Query("SELECT * FROM bookmark WHERE title LIKE '%' || :keyword || '%' OR content LIKE '%' || :keyword || '%' LIMIT :limit OFFSET :offset")
+    fun getBookmarkWithPaging(offset: Int, limit: Int, keyword: String): List<BookmarkEntity>
 
     @Insert
     fun insert(bookmark: BookmarkEntity)

@@ -12,7 +12,7 @@ class PostSelectionPagerAdapter(
 
     override fun getItem(position: Int): Fragment {
 
-        val category = when(position) {
+        val category = when (position) {
             1 -> Constant.CATEGORY_TV
             2 -> Constant.CATEGORY_MOBILE
             3 -> Constant.CATEGORY_NOTEBOOK
