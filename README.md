@@ -1,6 +1,12 @@
 # unwire-android
 A reader for [Unwire.HK](https://www.unwire.hk).
 
+# Function
+1. News Reader
+2. Facebook Video Player 
+3. Bookmark
+4. Light/Dark mode
+
 # Screenshot
 ![screen_1](https://github.com/kaiyan910/unwire-android/blob/master/assets/screen_1.png?raw=true)  
 ![screen_2](https://github.com/kaiyan910/unwire-android/blob/master/assets/screen_2.png?raw=true)
@@ -15,3 +21,4 @@ A reader for [Unwire.HK](https://www.unwire.hk).
 - Kotlin Coroutines
 - Koin
 - Retrofit
+- Room
