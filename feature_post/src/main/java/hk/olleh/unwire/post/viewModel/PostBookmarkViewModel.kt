@@ -21,6 +21,9 @@ class PostBookmarkViewModel(
     private val _posts: MutableLiveData<Resource<List<Post>>> = MutableLiveData()
     val posts: LiveData<Resource<List<Post>>> = _posts
 
+    private val _empty: MutableLiveData<Boolean> = MutableLiveData()
+    val empty: LiveData<Boolean> = _empty
+
     private var currentKeyword = ""
     private var page = 0
     private var canLoadMode = true
@@ -68,6 +71,8 @@ class PostBookmarkViewModel(
 
                     else -> posts
                 }
+
+                _empty.postValue(newList.isEmpty())
 
                 _posts.postValue(Resource.Success(newList))
 

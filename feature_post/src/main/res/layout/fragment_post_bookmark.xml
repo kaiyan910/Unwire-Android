@@ -3,6 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
+        <import type="android.view.View" />
+
         <variable
             name="vm"
             type="hk.olleh.unwire.post.viewModel.PostBookmarkViewModel" />
@@ -25,26 +28,63 @@
                 app:contentInsetStartWithNavigation="0dp"
                 app:navigationIcon="@drawable/ic_circle_logo"
                 app:tabBackground="?attr/appComponentBackground"
-                app:title="@string/bookmark_title"
+                app:title="@string/post_bookmark_title"
                 app:titleTextColor="@color/theme_color" />
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/swipe_refresh_layout"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:enabled="@{vm.loading}"
-            app:refreshing="@{vm.loading}">
+            android:layout_height="match_parent">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_post"
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/swipe_refresh_layout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                app:enabled="@{vm.loading}"
+                app:refreshing="@{vm.loading}">
 
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_post"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="@{safeUnbox(vm.empty) ? View.VISIBLE : View.GONE}">
+
+                <ImageView
+                    android:id="@+id/iv_404"
+                    android:layout_width="@dimen/post_empty_size"
+                    android:layout_height="@dimen/post_empty_size"
+                    android:src="@drawable/ic_404"
+                    android:tint="?attr/appText"
+                    app:layout_constraintBottom_toTopOf="@id/tv_empty"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="packed" />
+
+                <TextView
+                    android:id="@+id/tv_empty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_normal"
+                    android:text="@string/post_bookmark_empty"
+                    android:textColor="?attr/appText"
+                    android:textSize="@dimen/text_subheading"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/iv_404"
+                    app:layout_constraintStart_toStartOf="@id/iv_404"
+                    app:layout_constraintTop_toBottomOf="@id/iv_404" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </FrameLayout>
 
     </LinearLayout>
-
 
 </layout>

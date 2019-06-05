@@ -25,6 +25,7 @@
     <string name="post_search_hint">搜尋關鍵字&#8230;</string>
     <string name="post_search_result">關於 %1$s 的結果其有 %2$d 個</string>
 
-    <string name="bookmark_title">書籤</string>
+    <string name="post_bookmark_title">書籤</string>
+    <string name="post_bookmark_empty">Not Found</string>
 
 </resources>
