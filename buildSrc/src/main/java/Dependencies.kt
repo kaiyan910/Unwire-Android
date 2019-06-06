@@ -34,8 +34,7 @@ object Versions {
 
     const val KOIN = "2.0.0-GA4"
 
-    const val RETROFIT = "2.5.0"
-    const val RETROFIT_COROUTINES = "0.9.2"
+    const val RETROFIT = "2.6.0"
     const val OKHTTP_INTEREPTOR = "3.9.0"
 
     const val GLIDE = "4.9.0"
@@ -129,7 +128,6 @@ object Koin {
 // ==========
 object Retrofit {
     const val CORE = "com.squareup.retrofit2:retrofit:${Versions.RETROFIT}"
-    const val COROUTINES = "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:${Versions.RETROFIT_COROUTINES}"
     const val MOSHI = "com.squareup.retrofit2:converter-moshi:${Versions.RETROFIT}"
     const val OKHTTP_INTERCEPTOR =
         "com.squareup.okhttp3:logging-interceptor:${Versions.OKHTTP_INTEREPTOR}"

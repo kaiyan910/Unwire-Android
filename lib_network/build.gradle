@@ -28,7 +28,6 @@ dependencies {
     implementation Kotlin.STANDARD
     implementation Koin.ANDROID
     implementation Retrofit.CORE
-    implementation Retrofit.COROUTINES
     implementation Retrofit.MOSHI
     implementation Retrofit.OKHTTP_INTERCEPTOR
 }

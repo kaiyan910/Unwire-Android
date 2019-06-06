@@ -8,22 +8,14 @@ class RetrofitRemoteDataSource(
 ) : RemoteDataSource {
 
     override suspend fun getPosts(page: Int, isPro: Boolean): List<PostResponse> = if (!isPro) {
-
-        api
-            .getPosts(page)
-            .await()
-
+        api.getPosts(page)
     } else {
-
-        proApi
-            .getPosts(page)
-            .await()
+        proApi.getPosts(page)
     }
 
     override suspend fun getPostBySlug(slug: String): PostResponse? =
         api
             .getPostBySlug(slug)
-            .await()
             .firstOrNull()
 
     override suspend fun getPostsByCategory(
@@ -32,13 +24,8 @@ class RetrofitRemoteDataSource(
         isPro: Boolean,
         search: String
     ): List<PostResponse> = if (!isPro) {
-        api
-            .getPostsByCategory(category, page, search)
-            .await()
+        api.getPostsByCategory(category, page, search)
     } else {
-
-        proApi
-            .getPostsByCategory(category, page, search)
-            .await()
+        proApi.getPostsByCategory(category, page, search)
     }
 }

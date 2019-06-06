@@ -1,6 +1,5 @@
 package hk.olleh.unwire.network
 
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -40,7 +39,6 @@ val networkModule = module {
             .Builder()
             .baseUrl("https://unwire.hk")
             .addConverterFactory(get())
-            .addCallAdapterFactory(CoroutineCallAdapterFactory.invoke())
             .client(get())
             .build()
     }
@@ -51,7 +49,6 @@ val networkModule = module {
             .Builder()
             .baseUrl("https://unwire.pro")
             .addConverterFactory(get())
-            .addCallAdapterFactory(CoroutineCallAdapterFactory.invoke())
             .client(get())
             .build()
     }

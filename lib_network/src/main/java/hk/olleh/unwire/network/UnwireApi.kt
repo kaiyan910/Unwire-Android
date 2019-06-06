@@ -1,10 +1,8 @@
 package hk.olleh.unwire.network
 
 import hk.olleh.unwire.network.model.PostResponse
-import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
 import retrofit2.http.Query
-import retrofit2.http.Url
 
 interface UnwireApi {
 
@@ -13,16 +11,16 @@ interface UnwireApi {
     }
 
     @GET("$PREFIX/posts")
-    fun getPosts(@Query("page") page: Int): Deferred<List<PostResponse>>
+    suspend fun getPosts(@Query("page") page: Int): List<PostResponse>
 
     @GET("$PREFIX/posts")
-    fun getPostBySlug(@Query("slug") slug: String): Deferred<List<PostResponse>>
+    suspend fun getPostBySlug(@Query("slug") slug: String): List<PostResponse>
 
     @GET("$PREFIX/posts")
-    fun getPostsByCategory(
+    suspend fun getPostsByCategory(
         @Query("categories") category: String,
         @Query("page") page: Int,
         @Query("search") search: String,
         @Query("orderby") orderBy: String = "date"
-    ): Deferred<List<PostResponse>>
+    ): List<PostResponse>
 }
