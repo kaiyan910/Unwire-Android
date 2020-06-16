@@ -42,9 +42,13 @@ data class Post(
             categories = db.categories
                 .split(",")
                 .map { it.toLong() },
-            tags = db.tags
-                .split(",")
-                .map { it.toLong() },
+            tags = if (db.tags.isEmpty()) {
+                listOf()
+            } else {
+                db.tags
+                    .split(",")
+                    .map { it.toLong() }
+            },
             isVideo = db.isVideo,
             video = db.video
         )
